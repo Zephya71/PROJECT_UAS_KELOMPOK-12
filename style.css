@@ -124,3 +124,46 @@ header nav ul li a:hover{
     font-weight: 600;
 }
 /*Home stlye end*/
+
+/*Style login & admin*/
+* {
+    font-family: 'Arial', Helvetica, sans-serif;
+    font-size: 14px;
+}
+html {
+    background-color: peachpuff;
+}
+#app {
+    width: 600px;
+    margin: auto;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+h1 {
+    font-size: 30px;
+}
+.input {
+    padding: 10px;
+    width: 300px;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+nav ul li {
+    float: left;
+}
+nav ul li a {
+    display: inline-block;
+    padding: 10px;
+    color: #fff;
+    background-color: rgb(53, 92, 139);
+    text-decoration: none;
+    margin-right: 5px;
+}
+nav ul li a:hover {
+    background-color: rgb(81, 138, 209);
+}
