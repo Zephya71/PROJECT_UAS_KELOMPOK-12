@@ -1,9 +1,16 @@
+<?php
+session_start();
+include("inc_koneksi.php");
+if(!isset($_SESSION['user_username'])) {
+    header("location:login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Fundraising Desa</title>
+        <title>Fundraising Desa user</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" />
         <link rel="stylesheet" href="style.css" />
     </head>
@@ -26,10 +33,7 @@
                                 <a href="Javascript:void(0);">Galeri</a>
                             </li>
                             <li>
-                                <a href="donasi/donasi.html">Donasi</a>
-                            </li>
-                            <li>
-                                <a href="login.php">Login</a>
+                                <a href="logout.php">Log-out</a>
                             </li>
                         </ul>
                     </nav>

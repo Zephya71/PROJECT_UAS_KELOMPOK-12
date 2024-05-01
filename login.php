@@ -27,6 +27,33 @@ if(isset($_POST['login'])) {
         exit();
     }
 }
+if(isset($_SESSION['user_username'])) {
+    header("location:user.php");
+}
+include("inc_koneksi.php");
+$username = "";
+$password = "";
+$err = "";
+if(isset($_POST['login'])) {
+    $username   = $_POST['username'];
+    $password   = $_POST['password'];
+    if  ($username == '' or $password == ''){
+        $err .= "Silahkan Masukkan Username dan Password";
+    }
+    if(empty($err)){
+        $sql1 = "select * from user where username = '$username'";
+        $q1 = mysqli_query($koneksi, $sql1);
+        $r1 = mysqli_fetch_array($q1);
+        if($r1['password'] != md5($password)) {
+            $err .= "Akun tidak ditemukan";
+        }
+    }
+    if(empty($err)){
+        $_SESSION['user_username'] = $username;
+        header("location:user.php");
+        exit();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
