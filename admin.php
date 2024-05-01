@@ -35,19 +35,14 @@ if(!isset($_SESSION['admin_username'])) {
                             <li>
                                 <a href="logout.php">Log-out</a>
                             </li>
-                            <li>
-                                <a href="login.php">login</a>
-                            </li>
                         </ul>
                     </nav>
                 </div>
             </header>
 
             <div class="container">
-                <h1>Berbagi Berkah <span>Mengubah Hidup</span></h1>
-                <p>Yuk, mari kita bersama-sama berikan kebaikan kepada yang membutuhkan. Setiap sedekah kita adalah sinar harapan bagi orang lain.
-                </p>
-                <button>Mulai Dengan Yang Kecil</button>
+                <h1>Hai Admin, Selamat Datang!</h1>
+                <p>Selamat datang kembali di dashboard admin. Anda memiliki kendali penuh untuk mengelola platform kami.</p>
             </div>
         </div>
     </body>

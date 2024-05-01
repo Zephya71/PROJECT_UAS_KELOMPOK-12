@@ -41,10 +41,16 @@ if(!isset($_SESSION['user_username'])) {
             </header>
 
             <div class="container">
-                <h1>Berbagi Berkah <span>Mengubah Hidup</span></h1>
-                <p>Yuk, mari kita bersama-sama berikan kebaikan kepada yang membutuhkan. Setiap sedekah kita adalah sinar harapan bagi orang lain.
-                </p>
-                <button>Mulai Dengan Yang Kecil</button>
+                <h1>Hai Faradita, Selamat Datang di Fundraising Desa</h1>
+                <p>Yuk, mari kita bersama-sama berikan kebaikan kepada yang membutuhkan. Setiap sedekah kita adalah sinar harapan bagi orang lain.</p>
+                <p>Nikmati berbagai fitur menarik:</p>
+                <ul>
+                    <li>Galang dana untuk berbagai kegiatan amal yang mulia.</li>
+                    <li>Ikuti program penggalangan dana khusus dengan tujuan yang spesifik.</li>
+                    <li>Terhubung dengan komunitas yang peduli untuk berbagi ide dan dukungan.</li>
+                    <li>Lihat galeri untuk melihat dampak positif dari donasi Anda.</li>
+                </ul>
+                <a href="donasi/donasi.html"><button>Mulai Dengan Yang Kecil</button></a>
             </div>
         </div>
     </body>
