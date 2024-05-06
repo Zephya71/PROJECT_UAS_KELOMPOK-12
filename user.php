@@ -12,7 +12,7 @@ if(!isset($_SESSION['user_username'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Fundraising Desa user</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" />
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="style_login.css"/>
     </head>
     <body>
         <div class="fullcontainer banner" id="homeSection">
