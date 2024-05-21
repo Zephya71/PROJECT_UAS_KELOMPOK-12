@@ -20,7 +20,7 @@ if (isset($_GET['op'])) {
 }
 
 if ($op == 'delete') {
-    $id = $_GET['nama_'];
+    $id = $_GET['id'];
     $sql1 = "DELETE FROM campaign WHERE id = '$id'";
     $q1 = mysqli_query($koneksi, $sql1);
     if ($q1) {
@@ -47,7 +47,7 @@ if ($op == 'edit') {
 }
 
 if (isset($_POST['simpan'])) {
-    $nama_campaign = $_POST['id'];
+    $nama_campaign = $_POST['nama_campaign'];
     $kategori = $_POST['kategori'];
     $deskripsi = $_POST['deskripsi'];
     $target_dana = $_POST['target_dana'];
@@ -86,15 +86,6 @@ if (isset($_POST['simpan'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Campaign</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <style>
-        .mx-auto {
-            width: 940px
-        }
-
-        .card {
-            margin-top: 10px;
-        }
-    </style>
 </head>
 
 <body>
