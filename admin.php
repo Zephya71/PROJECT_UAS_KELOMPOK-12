@@ -5,35 +5,77 @@ if (!isset($_SESSION['admin_username'])) {
     header("location:login.php");
 }
 
-$nama_campaign          = "";
-$kategori       = "";
-$deskripsi      ="";
-$target_dana    = "";
-$status         = "";
-$error          = "";
-$sukses         = "";
+$nama_campaign = "";
+$kategori = "";
+$deskripsi = "";
+$target_dana = "";
+$status = "";
+$error = "";
+$sukses = "";
 
-// Memproses form saat tombol 'simpan' ditekan
-if(isset($_POST['simpan'])){ 
-    $nama_campaign  = $_POST['nama_campaign'];
-    $kategori       = $_POST['kategori'];
-    $deskripsi      = $_POST['deskripsi'];
-    $target_dana    = $_POST['target_dana'];
-    $status         = $_POST['status'];
+if (isset($_GET['op'])) {
+    $op = $_GET['op'];
+} else {
+    $op = "";
+}
 
-    if($nama_campaign && $kategori && $deskripsi && $target_dana && $status){
-        $sql1 = "insert into campaign (nama_campaign,kategori,deskripsi,target_dana, status) values ('$nama_campaign','$kategori','$deskripsi','$target_dana','$status')";
-        $q1   = mysqli_query($koneksi,$sql1);
-        if($q1){
-            $sukses = "Berhasil memasukkan data baru";
-        } else{
-            $error  = "Gagal memasukkan data";
-        }
-    } else{
-        $error = "Silahkan memasukkan semua data";
+if ($op == 'delete') {
+    $id = $_GET['nama_'];
+    $sql1 = "DELETE FROM campaign WHERE id = '$id'";
+    $q1 = mysqli_query($koneksi, $sql1);
+    if ($q1) {
+        $sukses = "Berhasil menghapus data";
+    } else {
+        $error = "Gagal menghapus data";
     }
 }
 
+if ($op == 'edit') {
+    $id = $_GET['id'];
+    $sql1 = "SELECT * FROM campaign WHERE id = '$id'";
+    $q1 = mysqli_query($koneksi, $sql1);
+    $r1 = mysqli_fetch_array($q1);
+    $nama_campaign = $r1['nama_campaign'];
+    $kategori = $r1['kategori'];
+    $deskripsi = $r1['deskripsi'];
+    $target_dana = $r1['target_dana'];
+    $status = $r1['status'];
+
+    if ($nama_campaign == '') {
+        $error = "Data tidak ditemukan";
+    }
+}
+
+if (isset($_POST['simpan'])) {
+    $nama_campaign = $_POST['id'];
+    $kategori = $_POST['kategori'];
+    $deskripsi = $_POST['deskripsi'];
+    $target_dana = $_POST['target_dana'];
+    $status = $_POST['status'];
+
+    if ($nama_campaign && $kategori && $deskripsi && $target_dana && $status) {
+        if ($op == 'edit') {
+            $id = $_GET['id'];
+            $sql1 = "UPDATE campaign SET nama_campaign = '$nama_campaign', kategori = '$kategori', deskripsi = '$deskripsi', target_dana = '$target_dana', status = '$status'";
+            $q1 = mysqli_query($koneksi, $sql1);
+            if ($q1) {
+                $sukses = "Data berhasil diupdate";
+            } else {
+                $error = "Data gagal diupdate";
+            }
+        } else {
+            $sql1 = "INSERT INTO campaign (nama_campaign, kategori, deskripsi, target_dana, status) VALUES ('$nama_campaign', '$kategori', '$deskripsi', '$target_dana', '$status')";
+            $q1 = mysqli_query($koneksi, $sql1);
+            if ($q1) {
+                $sukses = "Berhasil memasukkan data baru";
+            } else {
+                $error = "Gagal memasukkan data";
+            }
+        }
+    } else {
+        $error = "Silahkan memasukkan semua data";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -63,24 +105,20 @@ if(isset($_POST['simpan'])){
                 Input Data
             </div>
             <div class="card-body">
-                <?php
-                if($error){
-                    ?>
+                <?php if ($error) { ?>
                     <div class="alert alert-danger" role="alert">
                         <?php echo $error ?>
                     </div>
                 <?php
-                    header("refresh:5;url=index.php");
+                    header("refresh:5;url=admin.php");
                 }
                 ?>
-                <?php
-                if($sukses){
-                ?>
+                <?php if ($sukses) { ?>
                     <div class="alert alert-success" role="alert">
                         <?php echo $sukses ?>
                     </div>
                 <?php
-                    header("refresh:5;url=index.php");
+                    header("refresh:5;url=admin.php");
                 }
                 ?>
                 <form action="" method="POST">
@@ -90,34 +128,31 @@ if(isset($_POST['simpan'])){
                             <input type="text" class="form-control" id="nama_campaign" name="nama_campaign" value="<?php echo $nama_campaign ?>">
                         </div>
                     </div>
-
                     <div class="mb-3 row">
                         <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
                         <div class="col-sm-10">
                             <select class="form-select" name="kategori" id="kategori">
                                 <option value="">- Pilih Kategori -</option>
-                                <option value="Kesehatan" <?php if($kategori == "kesehatan") echo "selected"?>>Kesehatan</option>
-                                <option value="Pendidikan" <?php if($kategori == "pendidikan") echo "selected"?>>Pendidikan</option>
-                                <option value="Kemanusiaan" <?php if($kategori == "kemanusiaan") echo "selected"?>>Kemanusiaan</option>
-                                <option value="Bencana" <?php if($kategori == "bencana") echo "selected"?>>Bencana Alam</option>
+                                <option value="Kesehatan" <?php if ($kategori == "Kesehatan") echo "selected" ?>>Kesehatan</option>
+                                <option value="Pendidikan" <?php if ($kategori == "Pendidikan") echo "selected" ?>>Pendidikan</option>
+                                <option value="Kemanusiaan" <?php if ($kategori == "Kemanusiaan") echo "selected" ?>>Kemanusiaan</option>
+                                <option value="Bencana" <?php if ($kategori == "Bencana") echo "selected" ?>>Bencana Alam</option>
                             </select>
                         </div>
                     </div>
-
                     <div class="mb-3 row">
                         <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="<?php echo $deskripsi ?>">
                         </div>
                     </div>
-
                     <div class="mb-3 row">
-                        <label for="target_dana" class="col-sm-2 col-form-label">Target Dana</label>                  
+                        <label for="target_dana" class="col-sm-2 col-form-label">Target Dana</label>
                         <div class="col-sm-10">
                             <div class="input-group mb-3">
-                            <span for="target_dana" class="input-group-text">Rp.</span>
-                            <input type="text" class="form-control" id="target_dana" name="target_dana" value="<?php echo $target_dana ?>">
-                            <span class="input-group-text">.00</span>
+                                <span for="target_dana" class="input-group-text">Rp.</span>
+                                <input type="text" class="form-control" id="target_dana" name="target_dana" value="<?php echo $target_dana ?>">
+                                <span class="input-group-text">.00</span>
                             </div>
                         </div>
                     </div>
@@ -126,16 +161,15 @@ if(isset($_POST['simpan'])){
                         <div class="col-sm-10">
                             <select class="form-select" name="status" id="status">
                                 <option value="">- Pilih Status -</option>
-                                <option value="Aktif" <?php if($status == "aktif") echo "selected"?>>Aktif</option>
-                                <option value="Selesai" <?php if($status == "selesai") echo "selected"?>>Selesai</option>
-                                <option value="Gagal" <?php if($status == "gagal") echo "selected"?>>Gagal</option>
+                                <option value="Aktif" <?php if ($status == "Aktif") echo "selected" ?>>Aktif</option>
+                                <option value="Selesai" <?php if ($status == "Selesai") echo "selected" ?>>Selesai</option>
+                                <option value="Gagal" <?php if ($status == "Gagal") echo "selected" ?>>Gagal</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-12">
-                        <input type="submit" name="simpan"value="Simpan Data" class="btn btn-primary"/>
+                        <input type="submit" name="simpan" value="Simpan Data" class="btn btn-primary" />
                     </div>
-                    
                 </form>
             </div>
         </div>
@@ -155,39 +189,41 @@ if(isset($_POST['simpan'])){
                             <th scope="col">Deskripsi</th>
                             <th scope="col">Target Dana</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Aksi</th>
                         </tr>
-                        <tbody>
-                            <?php
-                            $sql2   = "select * from campaign order by nama_campaign desc";
-                            $q2     = mysqli_query($koneksi,$sql2);
-                            $urut   = 1;
-                            while($r2 = mysqli_fetch_array($q2)){
-                                $nama_campaign  = $r2['nama_campaign'];
-                                $kategori       = $r2['kategori'];
-                                $deskripsi      = $r2['deskripsi']; 
-                                $target_dana    = $r2['target_dana'];
-                                $status         = $r2['status'];
-
-                                ?>
-                                <tr>
-                                    <th scope="row"><?php echo $urut++?></th>
-                                    <td scope="row"><?php echo $nama_campaign?></td>
-                                    <td scope="row"><?php echo $kategori?></td>
-                                    <td scope="row"><?php echo $deskripsi?></td>
-                                    <td scope="row">Rp. <?php echo number_format($target_dana)?></td>
-                                    <td scope="row"><?php echo $status?></td>
-                                </tr>
-                                <?php
-                            }
-                            ?>
-                        </tbody>
                     </thead>
+                    <tbody>
+                        <?php
+                        $sql2 = "SELECT * from campaign order by nama_campaign desc";
+                        $q2 = mysqli_query($koneksi, $sql2);
+                        $urut = 1;
+                        while ($r2 = mysqli_fetch_array($q2)) {
+                            $id = $r2['id'];
+                            $nama_campaign = $r2['nama_campaign'];
+                            $kategori = $r2['kategori'];
+                            $deskripsi = $r2['deskripsi'];
+                            $target_dana = $r2['target_dana'];
+                            $status = $r2['status'];
+                        ?>
+                            <tr>
+                                <th scope="row" class="text-center"><?php echo $urut++ ?></th>
+                                <td><?php echo $nama_campaign ?></td>
+                                <td><?php echo $kategori ?></td>
+                                <td><?php echo $deskripsi ?></td>
+                                <td><?php echo $target_dana ?></td>
+                                <td><?php echo $status ?></td>
+                                <td class="text-center">
+                                    <a href="admin.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
+                                    <a href="admin.php?op=delete&id=<?php echo $id ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ?')"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
+                                </td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                    </tbody>
                 </table>
             </div>
-        </div><br>
-        <form class="logout" action="logout.php">
-			<button class="btn btn-danger" type="submit"> Logout </button>
-		</form>
+        </div>
     </div>
 </body>
 
