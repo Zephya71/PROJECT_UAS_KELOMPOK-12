@@ -3,6 +3,7 @@ session_start();
 include("inc_koneksi.php");
 if (!isset($_SESSION['admin_username'])) {
     header("location:login.php");
+    exit();
 }
 
 $nama_campaign = "";
@@ -13,11 +14,7 @@ $status = "";
 $error = "";
 $sukses = "";
 
-if (isset($_GET['op'])) {
-    $op = $_GET['op'];
-} else {
-    $op = "";
-}
+$op = isset($_GET['op']) ? $_GET['op'] : "";
 
 if ($op == 'delete') {
     $id = $_GET['id'];
@@ -34,15 +31,14 @@ if ($op == 'edit') {
     $id = $_GET['id'];
     $sql1 = "SELECT * FROM campaign WHERE id = '$id'";
     $q1 = mysqli_query($koneksi, $sql1);
-    $r1 = mysqli_fetch_array($q1);
-    $nama_campaign = $r1['nama_campaign'];
-    $kategori = $r1['kategori'];
-    $deskripsi = $r1['deskripsi'];
-    $target_dana = $r1['target_dana'];
-    $status = $r1['status'];
-
-    if ($nama_campaign == '') {
-        $error = "Data tidak ditemukan";
+    if ($r1 = mysqli_fetch_array($q1)) {
+        $nama_campaign = $r1['nama_campaign'];
+        $kategori = $r1['kategori'];
+        $deskripsi = $r1['deskripsi'];
+        $target_dana = $r1['target_dana'];
+        $status = $r1['status'];
+    } else {
+        $error = "Gagal edit data";
     }
 }
 
@@ -56,7 +52,7 @@ if (isset($_POST['simpan'])) {
     if ($nama_campaign && $kategori && $deskripsi && $target_dana && $status) {
         if ($op == 'edit') {
             $id = $_GET['id'];
-            $sql1 = "UPDATE campaign SET nama_campaign = '$nama_campaign', kategori = '$kategori', deskripsi = '$deskripsi', target_dana = '$target_dana', status = '$status'";
+            $sql1 = "UPDATE campaign SET nama_campaign = '$nama_campaign', kategori = '$kategori', deskripsi = '$deskripsi', target_dana = '$target_dana', status = '$status' WHERE id = '$id'";
             $q1 = mysqli_query($koneksi, $sql1);
             if ($q1) {
                 $sukses = "Data berhasil diupdate";
@@ -84,14 +80,27 @@ if (isset($_POST['simpan'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Campaign</title>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style_admin.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <div class="mx-auto">
+    <header class="navbar navbar-dark bg-dark p-3">
+        <a class="navbar-brand" href="#">Admin Dashboard</a>
+        <div class="admin-info d-flex align-items-center">
+            <img src="foto/about.jpg" alt="Admin Photo" class="admin-photo dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="admin-name"><?php echo $_SESSION['admin_username']; ?></div>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+            </ul>
+        </div>
+    </header>
+
         <!-- memasukkan data -->
-        <div class="card">
+        <div class="card mt-4">
             <div class="card-header">
                 Input Data
             </div>
@@ -166,7 +175,7 @@ if (isset($_POST['simpan'])) {
         </div>
 
         <!-- menampilkan data -->
-        <div class="card">
+        <div class="card mt-4">
             <div class="card-header text-white bg-secondary">
                 Data Campaign
             </div>
@@ -196,16 +205,16 @@ if (isset($_POST['simpan'])) {
                             $target_dana = $r2['target_dana'];
                             $status = $r2['status'];
                         ?>
-                            <tr>
-                                <th scope="row" class="text-center"><?php echo $urut++ ?></th>
+                            <tr class="text-center">
+                                <th scope="row"><?php echo $urut++ ?></th>
                                 <td><?php echo $nama_campaign ?></td>
                                 <td><?php echo $kategori ?></td>
                                 <td><?php echo $deskripsi ?></td>
                                 <td><?php echo $target_dana ?></td>
                                 <td><?php echo $status ?></td>
-                                <td class="text-center">
-                                    <a href="admin.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-warning btn-sm">Edit</button></a>
-                                    <a href="admin.php?op=delete&id=<?php echo $id ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ?')"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
+                                <td>
+                                    <a href="admin.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-warning">Edit</button></a>
+                                    <a href="admin.php?op=delete&id=<?php echo $id ?>" onclick="return confirm('Apakah yakin mau delete data?')"><button type="button" class="btn btn-danger">Delete</button></a>
                                 </td>
                             </tr>
                         <?php
@@ -215,6 +224,7 @@ if (isset($_POST['simpan'])) {
                 </table>
             </div>
         </div>
+    </div>
     </div>
 </body>
 
