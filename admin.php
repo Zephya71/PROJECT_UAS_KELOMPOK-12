@@ -99,7 +99,7 @@ if (isset($_POST['simpan'])) {
         </div>
     </header>
 
-        <!-- memasukkan data -->
+        <!-- Form input data -->
         <div class="card mt-4">
             <div class="card-header">
                 Input Data
@@ -174,7 +174,7 @@ if (isset($_POST['simpan'])) {
             </div>
         </div>
 
-        <!-- menampilkan data -->
+        <!-- Form menampilkan data -->
         <div class="card mt-4">
             <div class="card-header text-white bg-secondary">
                 Data Campaign

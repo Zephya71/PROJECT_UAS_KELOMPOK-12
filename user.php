@@ -54,9 +54,17 @@ if(!isset($_SESSION['user_username'])) {
 						<i class="bi bi-search"></i>
 					</button>
 				</form>
-				<form class="logout" action="logout.php">
-					<button class="btn btn-danger" type="submit"> Logout </button>
-				</form>
+				<div class="dropdown">
+					<a class="btn btn-light dropdown-toggle d-flex align-items-center" href="#" role="button"
+						id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+						<img src="path_to_profile_picture.jpg" alt="Profile" class="rounded-circle" width="30"
+							height="30">
+						<span class="ms-2">Username</span>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+						<li><a class="dropdown-item" href="logout.php">Logout</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</nav>
@@ -64,9 +72,10 @@ if(!isset($_SESSION['user_username'])) {
 		<div class="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
 			<div class="carousel-indicators">
 				<button aria-label="Slide 1" class="active" data-bs-slide-to="0"
-					data-bs-target="#carouselExampleIndicators" type="button"></button> <button aria-label="Slide 2"
-					data-bs-slide-to="1" data-bs-target="#carouselExampleIndicators" type="button"></button> <button
-					aria-label="Slide 3" data-bs-slide-to="2" data-bs-target="#carouselExampleIndicators"
+					data-bs-target="#carouselExampleIndicators" type="button"></button>
+				<button aria-label="Slide 2" data-bs-slide-to="1" data-bs-target="#carouselExampleIndicators"
+					type="button"></button>
+				<button aria-label="Slide 3" data-bs-slide-to="2" data-bs-target="#carouselExampleIndicators"
 					type="button"></button>
 			</div>
 			<div class="carousel-inner">
@@ -97,11 +106,12 @@ if(!isset($_SESSION['user_username'])) {
 						<p><a class="btn btn-success me-sm-3 mt-3" href="#">Donate Now</a></p>
 					</div>
 				</div>
-			</div><button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#carouselExampleIndicators"
-				type="button"><span aria-hidden="true" class="carousel-control-prev-icon"></span> <span
-					class="visually-hidden">Previous</span></button> <button class="carousel-control-next"
-				data-bs-slide="next" data-bs-target="#carouselExampleIndicators" type="button"><span aria-hidden="true"
-					class="carousel-control-next-icon"></span> <span class="visually-hidden">Next</span></button>
+			</div><button class="carousel-control-prev" data-bs-slide="prev"
+				data-bs-target="#carouselExampleIndicators" type="button"><span aria-hidden="true"
+					class="carousel-control-prev-icon"></span> <span class="visually-hidden">Previous</span></button>
+			<button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleIndicators"
+				type="button"><span aria-hidden="true" class="carousel-control-next-icon"></span> <span
+					class="visually-hidden">Next</span></button>
 		</div>
 	</div><!-- about section starts -->
 	<section class="about section-padding" id="about">
@@ -113,7 +123,9 @@ if(!isset($_SESSION['user_username'])) {
 				<div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
 					<div class="about-text">
 						<h2>Berbagi Berkah</h2>
-						<p>Yuk, mari kita bersama-sama memberikan kebaikan kepada yang membutuhkan. Setiap sedekah kita adalah sinar harapan bagi orang lain</p><a class="btn btn-outline-success" href="#">Learn More</a>
+						<p>Yuk, mari kita bersama-sama memberikan kebaikan kepada yang membutuhkan. Setiap sedekah kita
+							adalah sinar harapan bagi orang lain</p><a class="btn btn-outline-success" href="#">Learn
+							More</a>
 					</div>
 				</div>
 			</div>
@@ -150,218 +162,187 @@ if(!isset($_SESSION['user_username'])) {
 				<div class="col-12 col-md-6 col-lg-2">
 					<a href="#" class="card text-white text-center bg-success pb-2 text-decoration-none">
 						<div class="card-body">
-							<i class="bi bi-cash-coin"></i>
-							<h6 class="card-title">Kewirausahaan</h6>
-						</div>
-					</a>
-				</div>
-				<div class="col-12 col-md-6 col-lg-2">
-					<a href="#" class="card text-white text-center bg-success pb-2 text-decoration-none">
-						<div class="card-body">
-							<i class="bi bi-tree"></i>
-							<h6 class="card-title">Lingkungan</h6>
-						</div>
-					</a>
-				</div>
-				<div class="col-12 col-md-6 col-lg-2">
-					<a href="#" class="card text-white text-center bg-success pb-2 text-decoration-none">
-						<div class="card-body">
-							<i class="bi bi-tools"></i>
-							<h6 class="card-title">Pembangunan</h6>
-						</div>
-					</a>
-				</div>
-				<div class="col-12 col-md-6 col-lg-2">
-					<a href="#" class="card text-white text-center bg-success pb-2 text-decoration-none">
-						<div class="card-body">
 							<i class="bi bi-book"></i>
 							<h6 class="card-title">Pendidikan</h6>
 						</div>
 					</a>
 				</div>
 				<div class="col-12 col-md-6 col-lg-2">
-					<a href="#" class="card text-white text-center bg-success pb-2 text-decoration-none my-sm-4">
+					<a href="#" class="card text-white text-center bg-success pb-2 text-decoration-none">
 						<div class="card-body">
-							<i class="bi bi-three-dots"></i>
+							<i class="bi bi-mosque"></i>
+							<h6 class="card-title">Wakaf</h6>
+						</div>
+					</a>
+				</div>
+				<div class="col-12 col-md-6 col-lg-2">
+					<a href="#" class="card text-white text-center bg-success pb-2 text-decoration-none">
+						<div class="card-body">
+							<i class="bi bi-heart"></i>
 							<h6 class="card-title">Lainnya</h6>
+						</div>
+					</a>
+				</div>
+				<div class="col-12 col-md-6 col-lg-2">
+					<a href="#" class="card text-white text-center bg-success pb-2 text-decoration-none">
+						<div class="card-body">
+							<i class="bi bi-archive"></i>
+							<h6 class="card-title">Semua</h6>
 						</div>
 					</a>
 				</div>
 			</div>
 		</div>
 	</section><!-- kategori section Ends -->
-	<!-- donasi strats -->
+	<!-- donasi section Starts -->
 	<section class="donasi section-padding" id="donasi">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="section-header text-center pb-4">
-						<h2>Donasi Mendesak</h2>
-						<p>Utamakan membantu yang ada dibawah ini!</p>
+					<div class="section-header text-center pb-5">
+						<h2>Donasi Terbaru</h2>
+						<p>Bantu sesama kita dengan berdonasi</p>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-12 col-md-12 col-lg-4">
-					<div class="card text-light text-center bg-white pb-2">
-						<div class="card-body text-dark">
-							<div class="img-area mb-4"><img alt="" class="img-fluid" src="Foto/home-2.jpeg"></div>
-							<h3 class="card-title">Nenek Sumiati</h3>
-							<p class="card-text">Menjadi tulang punggung keluarga di usianya yang sudah lanjut demi untuk menghidupi
-								cucu-cucunya. Luangkan sebagian hartamu untuk membantu si nenek!</p><button
-								class="btn btn-success">Donate Now</button>
+				<div class="col-12 col-md-6 col-lg-4">
+					<div class="card text-dark text-center bg-white pb-2">
+						<div class="card-body">
+							<div class="img-area mb-4">
+								<img src="Foto/card-2.jpeg" alt="" class="img-fluid">
+							</div>
+							<h3 class="card-title">Jalan Anak Soleh</h3>
+							<p class="lead">Musholla al-Ikhlas</p>
+							<button class="btn btn-success btn-sm">Donate Now</button>
 						</div>
 					</div>
 				</div>
-				<div class="col-12 col-md-12 col-lg-4">
-					<div class="card text-light text-center bg-white pb-2">
-						<div class="card-body text-dark">
-							<div class="img-area mb-4"><img alt="" class="img-fluid" src="Foto/home-1.jpeg"></div>
-							<h3 class="card-title">Cancer Fighter</h3>
-							<p class="card-text">Bantu tetangga kita agar segera sembuh dari kanker. Semangatnya yang tak pernah padam dalam
-								berjuang harus kita dukung!</p><button
-								class="btn btn-success">Donate Now</button>
+				<div class="col-12 col-md-6 col-lg-4">
+					<div class="card text-dark text-center bg-white pb-2">
+						<div class="card-body">
+							<div class="img-area mb-4">
+								<img src="Foto/card-3.jpeg" alt="" class="img-fluid">
+							</div>
+							<h3 class="card-title">Bantu Sesama</h3>
+							<p class="lead">Yuk Peduli</p>
+							<button class="btn btn-success btn-sm">Donate Now</button>
 						</div>
 					</div>
 				</div>
-				<div class="col-12 col-md-12 col-lg-4">
-					<div class="card text-light text-center bg-white pb-2">
-						<div class="card-body text-dark">
-							<div class="img-area mb-4"><img alt="" class="img-fluid" src="Foto/home-3.jpeg"></div>
-							<h3 class="card-title">Musholla Al-Ikhlas</h3>
-							<p class="card-text">Bismillah. Pembangunan musholla ini akan bertempat di sekitar area Kampung 1. Donasi sekarang
-								agar memperoleh sedekah jariyah!</p><button
-								class="btn btn-success">Donate Now</button>
+				<div class="col-12 col-md-6 col-lg-4">
+					<div class="card text-dark text-center bg-white pb-2">
+						<div class="card-body">
+							<div class="img-area mb-4">
+								<img src="Foto/card-1.jpeg" alt="" class="img-fluid">
+							</div>
+							<h3 class="card-title">Wakaf Pembangunan</h3>
+							<p class="lead">Ayo Wakaf</p>
+							<button class="btn btn-success btn-sm">Donate Now</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section><!-- donasi ends -->
-	<!-- berita starts -->
-	<section class="section-padding" id="berita">
+	</section><!-- donasi section Ends -->
+	<!-- berita section starts -->
+	<section class="berita section-padding" id="berita">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="section-header text-center pb-4">
-						<h2>Berita</h2>
-						<p>Update perkembangan dan berita terkini.</p>
+					<div class="section-header text-center pb-5">
+						<h2>Berita Terbaru</h2>
+						<p>Dapatkan berita terbaru dari kami</p>
 					</div>
 				</div>
 			</div>
-			<div class="berita">
-				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<div class="single-item">
-								<div class="row">
-									<div class="col-lg-4 col-md-12 col-12">
-										<div class="berita-img"><img alt="" class="img-fluid" src="Foto/home-2.jpeg"></div>
-									</div>
-									<div class="col-lg-8 col-md-12 col-12 ps-lg-4">
-										<div class="berita-text">
-											<h2>Pendidikan Layak</h2>
-											<p>Campaign ini telah selsai dan telah tersalurkan ke orang yang bersangkutan.</p>
-											<a class="btn btn-outline-success" href="#">Read More</a>
-										</div>
-									</div>
-								</div>
+			<div class="row">
+				<div class="col-12 col-md-6 col-lg-4">
+					<div class="card text-dark text-center bg-white pb-2">
+						<div class="card-body">
+							<div class="img-area mb-4">
+								<img src="Foto/berita-1.jpeg" alt="" class="img-fluid">
 							</div>
-						</div>
-						<div class="carousel-item">
-							<div class="single-item">
-								<div class="row">
-									<div class="col-lg-4 col-md-12 col-12">
-										<div class="berita-img"><img alt="" class="img-fluid" src="img/berita-2.jpg"></div>
-									</div>
-									<div class="col-lg-8 col-md-12 col-12 ps-lg-4">
-										<div class="berita-text">
-											<h2>Pendidikan Layak<br>
-											</h2>
-											<p>Campaign ini telah selsai dan telah tersalurkan ke orang yang bersangkutan.</p>
-											<a class="btn btn-outline-success" href="#">Read More</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="carousel-item">
-							<div class="single-item">
-								<div class="row">
-									<div class="col-lg-4 col-md-12 col-12">
-										<div class="berita-img"><img alt="" class="img-fluid" src="img/berita-3.jpg"></div>
-									</div>
-									<div class="col-lg-8 col-md-12 col-12 ps-lg-4">
-										<div class="berita-text">
-											<h2>Pendidikan Layak<br>
-											</h2>
-											<p>Campaign ini telah selsai dan telah tersalurkan ke orang yang bersangkutan.</p>
-											<a class="btn btn-outline-success" href="#">Read More</a>
-										</div>
-									</div>
-								</div>
-							</div>
+							<h3 class="card-title">Nenek Sumiati</h3>
+							<p class="lead">Kisah Nenek Sumiati</p>
+							<button class="btn btn-success btn-sm">Read More</button>
 						</div>
 					</div>
-					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-						data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-						data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
 				</div>
-
+				<div class="col-12 col-md-6 col-lg-4">
+					<div class="card text-dark text-center bg-white pb-2">
+						<div class="card-body">
+							<div class="img-area mb-4">
+								<img src="Foto/berita-2.jpeg" alt="" class="img-fluid">
+							</div>
+							<h3 class="card-title">Cancer Fighter</h3>
+							<p class="lead">Perjuangan Seorang Anak Melawan Kanker</p>
+							<button class="btn btn-success btn-sm">Read More</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 col-lg-4">
+					<div class="card text-dark text-center bg-white pb-2">
+						<div class="card-body">
+							<div class="img-area mb-4">
+								<img src="Foto/berita-3.jpeg" alt="" class="img-fluid">
+							</div>
+							<h3 class="card-title">Pembangunan Musholla</h3>
+							<p class="lead">Progres Pembangunan Musholla Al-Ikhlas</p>
+							<button class="btn btn-success btn-sm">Read More</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</section><!-- berita ends -->
-	<!-- Contact starts -->
+	</section><!-- berita section Ends -->
+	<!-- contact section Starts -->
 	<section class="contact section-padding" id="contact">
-		<div class="container mb-5">
+		<div class="container mt-5">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="section-header text-center pb-5">
-						<h2>Contact Us</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur<br>
-							adipisicing elit. Non, quo.</p>
+						<h2>Kontak Kami</h2>
+						<p>Hubungi kami untuk informasi lebih lanjut</p>
 					</div>
 				</div>
 			</div>
 			<div class="row m-0">
-				<div class="col-md-12 p-0 pt-4 p-4 m-auto">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="mb-3">
-								<input type="text" class="form-control" placeholder="Your full name">
+				<div class="col-md-12 p-0 pt-4 pb-4">
+					<form action="#" class="bg-light p-4 m-auto">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="mb-3">
+									<input class="form-control" placeholder="Nama Depan" required type="text">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="mb-3">
+									<input class="form-control" placeholder="Nama Belakang" required type="text">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="mb-3">
+									<input class="form-control" placeholder="No. Telepon" required type="text">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="mb-3">
+									<input class="form-control" placeholder="Email" required type="email">
+								</div>
 							</div>
 						</div>
-						<div class="col-md-12">
-							<div class="mb-3">
-								<input type="email" class="form-control" placeholder="Your email here">
-							</div>
+						<div class="mb-3">
+							<textarea class="form-control" placeholder="Pesan" required rows="3"></textarea>
 						</div>
-						<div class="col-md-12">
-							<div class="mb-3">
-								<textarea rows="3" class="form-control" placeholder="Your query here"></textarea>
-							</div>
+						<div class="col-md-12 text-center">
+							<button class="btn btn-success mt-3" type="submit">Kirim Pesan</button>
 						</div>
-
-						<button class="btn btn-warning btn-lg btn-block mt-3">Send Now</button>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
-	</section><!-- contact ends -->
-	<!-- footer starts -->
-	<footer class="bg-dark p-2 text-center">
-		<div class="container">
-			<p class="text-white">All Right Reserved By @Kelompok 12</p>
-		</div>
-	</footer>
-	<!-- footer ends -->
+	</section><!-- contact section Ends -->
 </body>
 
 </html>

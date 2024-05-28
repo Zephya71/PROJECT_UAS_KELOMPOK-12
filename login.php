@@ -69,12 +69,16 @@ if (isset($_POST['login'])) {
         }
         ?>
         <form action="" method="post">
-            <input type="text" value="<?php echo $username ?>" name="username" class="input" placeholder="Masukkan Username" /><br><br>
+            <input type="text" value="<?php echo htmlspecialchars($username); ?>" name="username" class="input" placeholder="Masukkan Username" /><br><br>
             <input type="password" name="password" id="password" class="input" placeholder="Masukkan Password" />
-            <input type="checkbox" onclick="showPassword()">Show Password<br><br>
+            <div class="checkbox-container">
+                <input type="checkbox" onclick="showPassword()">
+                <label for="showPassword" class="checkbox-label">Show Password</label>
+            </div>
             <input type="submit" name="login" value="Login" />
             <p>Belum punya akun? <a href="register.php">Daftar disini</a></p>
         </form>
+        <button class="back-button" onclick="location.href='index.html'">ke Halaman Utama</button>
     </div>
 
     <script>
