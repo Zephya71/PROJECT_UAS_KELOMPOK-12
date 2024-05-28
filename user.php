@@ -1,8 +1,23 @@
 <?php
 session_start();
 include("inc_koneksi.php");
-if(!isset($_SESSION['user_username'])) {
+
+// Periksa apakah pengguna sudah login, jika tidak, alihkan ke halaman login
+if (!isset($_SESSION['user_username'])) {
     header("location:login.php");
+    exit; // Penting untuk menghentikan eksekusi skrip setelah melakukan pengalihan header
+}
+
+// Ambil nama user dari database
+$user_username = $_SESSION['user_username'];
+$sql = "SELECT nama_user FROM user WHERE username = '$user_username'";
+$result = mysqli_query($koneksi, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $nama_user = $row['nama_user'];
+} else {
+    $nama_user = "Nama Pengguna"; // Atur nama default jika tidak ditemukan dalam database
 }
 ?>
 <!DOCTYPE html>
@@ -22,9 +37,9 @@ if(!isset($_SESSION['user_username'])) {
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-		<div class="container">
-			<div class="navbar-brand" href="#"><span class="text-success">Care</span>Bridge</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <div class="navbar-brand" href="#"><span class="text-success">Care</span>Bridge</div>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
 				aria-label="Toggle navigation">
@@ -55,19 +70,18 @@ if(!isset($_SESSION['user_username'])) {
 					</button>
 				</form>
 				<div class="dropdown">
-					<a class="btn btn-light dropdown-toggle d-flex align-items-center" href="#" role="button"
-						id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-						<img src="path_to_profile_picture.jpg" alt="Profile" class="rounded-circle" width="30"
-							height="30">
-						<span class="ms-2">Username</span>
-					</a>
-					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-						<li><a class="dropdown-item" href="logout.php">Logout</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</nav>
+                <a class="btn btn-light dropdown-toggle d-flex align-items-center" href="#" role="button"
+                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="foto/foto profil v1.png" alt="Profile" class="rounded-circle" width="30"
+                        height="30">
+                    <span class="ms-2"><?php echo $nama_user; ?></span>
+                </a>
+				<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 	<div class="home" id="home">
 		<div class="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
 			<div class="carousel-indicators">
