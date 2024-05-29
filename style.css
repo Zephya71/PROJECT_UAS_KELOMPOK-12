@@ -8,7 +8,7 @@ body {
 .form-control[type="search"] {
 	border-radius: 25px 0 0 25px;
   }
-.btn[type="submit"] {
+.btn-secondary[type="submit"] {
     border-radius: 0 25px 25px 0;
 }
 .section-padding {
@@ -148,7 +148,7 @@ body {
 	}
 }
 
-/* testimoni */
+/* berita */
 .berita{
     max-width: 1000px;
     margin: 0 auto 80px auto;

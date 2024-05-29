@@ -6,6 +6,7 @@ if (!isset($_SESSION['admin_username'])) {
     exit();
 }
 
+$gambar        = "";
 $nama_campaign = "";
 $kategori = "";
 $deskripsi = "";
@@ -32,6 +33,7 @@ if ($op == 'edit') {
     $sql1 = "SELECT * FROM campaign WHERE id = '$id'";
     $q1 = mysqli_query($koneksi, $sql1);
     if ($r1 = mysqli_fetch_array($q1)) {
+        $gambar  = $r1['gambar'];
         $nama_campaign = $r1['nama_campaign'];
         $kategori = $r1['kategori'];
         $deskripsi = $r1['deskripsi'];
@@ -49,10 +51,15 @@ if (isset($_POST['simpan'])) {
     $target_dana = $_POST['target_dana'];
     $status = $_POST['status'];
 
-    if ($nama_campaign && $kategori && $deskripsi && $target_dana && $status) {
+    $extensi = explode(".", $_FILES['gambar']['name']);
+    $gambar  = "foto-".round(microtime(true)).".".end($extensi);
+    $sumber  = $_FILES['gambar']['tmp_name'];
+    $upload = move_uploaded_file($sumber,'Foto/'.$gambar);
+
+    if ($gambar && $nama_campaign && $kategori && $deskripsi && $target_dana && $status) {
         if ($op == 'edit') {
             $id = $_GET['id'];
-            $sql1 = "UPDATE campaign SET nama_campaign = '$nama_campaign', kategori = '$kategori', deskripsi = '$deskripsi', target_dana = '$target_dana', status = '$status' WHERE id = '$id'";
+            $sql1 = "UPDATE campaign SET gambar = '$gambar', nama_campaign = '$nama_campaign', kategori = '$kategori', deskripsi = '$deskripsi', target_dana = '$target_dana', status = '$status' WHERE id = '$id'";
             $q1 = mysqli_query($koneksi, $sql1);
             if ($q1) {
                 $sukses = "Data berhasil diupdate";
@@ -60,7 +67,7 @@ if (isset($_POST['simpan'])) {
                 $error = "Data gagal diupdate";
             }
         } else {
-            $sql1 = "INSERT INTO campaign (nama_campaign, kategori, deskripsi, target_dana, status) VALUES ('$nama_campaign', '$kategori', '$deskripsi', '$target_dana', '$status')";
+            $sql1 = "INSERT INTO campaign (gambar, nama_campaign, kategori, deskripsi, target_dana, status) VALUES ('$gambar', '$nama_campaign', '$kategori', '$deskripsi', '$target_dana', '$status')";
             $q1 = mysqli_query($koneksi, $sql1);
             if ($q1) {
                 $sukses = "Berhasil memasukkan data baru";
@@ -93,13 +100,13 @@ if (isset($_POST['simpan'])) {
         <div class="admin-info d-flex align-items-center">
             <img src="foto/about.jpg" alt="Admin Photo" class="admin-photo dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             <div class="admin-name"><?php echo $_SESSION['admin_username']; ?></div>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+            <ul class="dropdown-menu dropdown-menu-end bg-danger" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item bg-danger text-white" href="logout.php">Logout</a></li>
             </ul>
         </div>
     </header>
 
-        <!-- Form input data -->
+        <!-- memasukkan data -->
         <div class="card mt-4">
             <div class="card-header">
                 Input Data
@@ -121,7 +128,15 @@ if (isset($_POST['simpan'])) {
                     header("refresh:5;url=admin.php");
                 }
                 ?>
-                <form action="" method="POST">
+                <form enctype="multipart/form-data" action="" method="POST">
+                    <div class="mb-3 row">
+                        <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
+                        <div class="col-sm-10">
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="inputGroupFile04" name="gambar" value="<?php echo $gambar ?>">
+                        </div>
+                        </div>
+                    </div>
                     <div class="mb-3 row">
                         <label for="nama_campaign" class="col-sm-2 col-form-label">Nama Campaign</label>
                         <div class="col-sm-10">
@@ -151,7 +166,7 @@ if (isset($_POST['simpan'])) {
                         <div class="col-sm-10">
                             <div class="input-group mb-3">
                                 <span for="target_dana" class="input-group-text">Rp.</span>
-                                <input type="text" class="form-control" id="target_dana" name="target_dana" value="<?php echo $target_dana ?>">
+                                <input type="number" class="form-control" id="target_dana" name="target_dana" value="<?php echo $target_dana ?>">
                                 <span class="input-group-text">.00</span>
                             </div>
                         </div>
@@ -167,14 +182,14 @@ if (isset($_POST['simpan'])) {
                             </select>
                         </div>
                     </div>
-                    <div class="col-12">
+                    <div class="text-end">
                         <input type="submit" name="simpan" value="Simpan Data" class="btn btn-primary" />
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- Form menampilkan data -->
+        <!-- menampilkan data -->
         <div class="card mt-4">
             <div class="card-header text-white bg-secondary">
                 Data Campaign
@@ -184,9 +199,10 @@ if (isset($_POST['simpan'])) {
                     <thead>
                         <tr class="text-center">
                             <th scope="col">No.</th>
+                            <th scope="col">Gambar</th>
                             <th scope="col">Nama Campaign</th>
                             <th scope="col">Kategori</th>
-                            <th scope="col">Deskripsi</th>
+                            <th scope="col" width="30%">Deskripsi</th>
                             <th scope="col">Target Dana</th>
                             <th scope="col">Status</th>
                             <th scope="col">Aksi</th>
@@ -194,11 +210,12 @@ if (isset($_POST['simpan'])) {
                     </thead>
                     <tbody>
                         <?php
-                        $sql2 = "SELECT * from campaign order by nama_campaign desc";
+                        $sql2 = "SELECT * from campaign order by gambar desc";
                         $q2 = mysqli_query($koneksi, $sql2);
                         $urut = 1;
                         while ($r2 = mysqli_fetch_array($q2)) {
                             $id = $r2['id'];
+                            $gambar = $r2['gambar'];
                             $nama_campaign = $r2['nama_campaign'];
                             $kategori = $r2['kategori'];
                             $deskripsi = $r2['deskripsi'];
@@ -207,10 +224,13 @@ if (isset($_POST['simpan'])) {
                         ?>
                             <tr class="text-center">
                                 <th scope="row"><?php echo $urut++ ?></th>
+                                <td>
+                                    <img src="Foto/<?php echo $gambar ?>" width="160px">
+                                </td>
                                 <td><?php echo $nama_campaign ?></td>
                                 <td><?php echo $kategori ?></td>
                                 <td><?php echo $deskripsi ?></td>
-                                <td><?php echo $target_dana ?></td>
+                                <td>Rp. <?php echo number_format($target_dana) ?></td>
                                 <td><?php echo $status ?></td>
                                 <td>
                                     <a href="admin.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-warning">Edit</button></a>

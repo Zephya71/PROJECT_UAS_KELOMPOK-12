@@ -47,11 +47,12 @@
 						<i class="bi bi-search"></i>
 					</button>
 				</form>
-				<form class="login" action="login.php">
-					<button class="btn btn-primary" type="submit"> Login </button>
-				</form>
+				
 			</div>
 		</div>
+		<form class="login" action="login.php">
+			<button class="btn btn-primary me-3" type="submit"> Login </button>
+		</form>
 	</nav>
 	<div class="home" id="home">
 		<div class="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
@@ -151,14 +152,6 @@
 				<div class="col-12 col-md-6 col-lg-2">
 					<a href="#" class="card text-white text-center bg-success pb-2 text-decoration-none">
 						<div class="card-body">
-							<i class="bi bi-tree"></i>
-							<h6 class="card-title">Lingkungan</h6>
-						</div>
-					</a>
-				</div>
-				<div class="col-12 col-md-6 col-lg-2">
-					<a href="#" class="card text-white text-center bg-success pb-2 text-decoration-none">
-						<div class="card-body">
 							<i class="bi bi-tools"></i>
 							<h6 class="card-title">Pembangunan</h6>
 						</div>
@@ -173,10 +166,26 @@
 					</a>
 				</div>
 				<div class="col-12 col-md-6 col-lg-2">
+					<a href="#" class="card text-white text-center bg-success pb-2 text-decoration-none">
+						<div class="card-body">
+							<i class="bi bi-wallet2"></i>
+							<h6 class="card-title">Wakaf</h6>
+						</div>
+					</a>
+				</div>
+				<div class="col-12 col-md-6 col-lg-2">
 					<a href="#" class="card text-white text-center bg-success pb-2 text-decoration-none my-sm-4">
 						<div class="card-body">
-							<i class="bi bi-three-dots"></i>
+							<i class="bi bi-heart"></i>
 							<h6 class="card-title">Lainnya</h6>
+						</div>
+					</a>
+				</div>
+				<div class="col-12 col-md-6 col-lg-2">
+					<a href="#" class="card text-white text-center bg-success pb-2 text-decoration-none my-sm-4">
+						<div class="card-body">
+							<i class="bi bi-archive"></i>
+							<h6 class="card-title">Semua</h6>
 						</div>
 					</a>
 				</div>
@@ -311,43 +320,53 @@
 			</div>
 		</div>
 	</section><!-- berita ends -->
-	<!-- Contact starts -->
+	<!-- contact section Starts -->
 	<section class="contact section-padding" id="contact">
-		<div class="container mb-5">
+		<div class="container mt-5">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="section-header text-center pb-5">
-						<h2>Contact Us</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur<br>
-							adipisicing elit. Non, quo.</p>
+						<h2>Kontak Kami</h2>
+						<p>Hubungi kami untuk informasi lebih lanjut</p>
 					</div>
 				</div>
 			</div>
 			<div class="row m-0">
-				<div class="col-md-12 p-0 pt-4 p-4 m-auto">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="mb-3">
-								<input type="text" class="form-control" placeholder="Your full name">
+				<div class="col-md-12 p-0 pt-4 pb-4">
+					<form action="#" class="bg-light p-4 m-auto">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="mb-3">
+									<input class="form-control" placeholder="Nama Depan" required type="text">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="mb-3">
+									<input class="form-control" placeholder="Nama Belakang" required type="text">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="mb-3">
+									<input class="form-control" placeholder="No. Telepon" required type="text">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="mb-3">
+									<input class="form-control" placeholder="Email" required type="email">
+								</div>
 							</div>
 						</div>
-						<div class="col-md-12">
-							<div class="mb-3">
-								<input type="email" class="form-control" placeholder="Your email here">
-							</div>
+						<div class="mb-3">
+							<textarea class="form-control" placeholder="Pesan" required rows="3"></textarea>
 						</div>
-						<div class="col-md-12">
-							<div class="mb-3">
-								<textarea rows="3" class="form-control" placeholder="Your query here"></textarea>
-							</div>
+						<div class="col-md-12 text-center">
+							<button class="btn btn-success btn-lg mt-3" type="submit">Kirim Pesan</button>
 						</div>
-
-						<button class="btn btn-warning btn-lg btn-block mt-3">Send Now</button>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
-	</section><!-- contact ends -->
+	</section><!-- contact section Ends -->
 	<!-- footer starts -->
 	<footer class="bg-dark p-2 text-center">
 		<div class="container">

@@ -63,10 +63,10 @@ if (isset($_POST['register'])) {
         }
         ?>
         <form action="" method="post">
-            <input type="text" value="<?php echo htmlspecialchars($username); ?>" name="username" class="input" placeholder="Masukkan Username" /><br><br>
-            <input type="password" name="password" id="password" class="input" placeholder="Masukkan Password" /><br><br>
-            <input type="password" name="confirm_password" id="confirm_password" class="input" placeholder="Konfirmasi Password" /><br><br>
-            <input type="text" value="<?php echo htmlspecialchars($nama_user); ?>" name="nama_user" class="input" placeholder="Masukkan Nama Lengkap" /><br><br>
+            <input type="text" value="<?php echo htmlspecialchars($username); ?>" name="username" class="input" placeholder="Masukkan Username" /><br>
+            <input type="password" name="password" id="password" class="input" placeholder="Masukkan Password" /><br>
+            <input type="password" name="confirm_password" id="confirm_password" class="input" placeholder="Konfirmasi Password" /><br>
+            <input type="text" value="<?php echo htmlspecialchars($nama_user); ?>" name="nama_user" class="input" placeholder="Masukkan Nama Lengkap" /><br>
             <input type="submit" name="register" value="Register" />
             <p>Sudah punya akun? <a href="login.php">Login disini</a></p>
         </form>

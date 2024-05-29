@@ -69,7 +69,7 @@ if (isset($_POST['login'])) {
         }
         ?>
         <form action="" method="post">
-            <input type="text" value="<?php echo htmlspecialchars($username); ?>" name="username" class="input" placeholder="Masukkan Username" /><br><br>
+            <input type="text" value="<?php echo htmlspecialchars($username); ?>" name="username" class="input" placeholder="Masukkan Username" /><br>
             <input type="password" name="password" id="password" class="input" placeholder="Masukkan Password" />
             <div class="checkbox-container">
                 <input type="checkbox" onclick="showPassword()">

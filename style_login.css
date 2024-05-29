@@ -57,6 +57,7 @@ h1 {
 
 .checkbox-label {
     margin-left: 5px;
+    font-size: 14px;
 }
 
 input[type="checkbox"] {
@@ -101,11 +102,13 @@ button.back-button:hover {
 
 p {
     text-align: center; /* Center align the paragraph text */
+    font-size: 14px;
 }
 
 a {
     color: #4CAF50; /* Link color */
     text-decoration: none; /* Remove underline from links */
+    font-size: 14px;
 }
 
 a:hover {
