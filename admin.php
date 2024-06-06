@@ -108,7 +108,7 @@ if (isset($_POST['simpan'])) {
 
         <!-- memasukkan data -->
         <div class="card mt-4">
-            <div class="card-header">
+            <div class="card-header text-white bg-secondary">
                 Input Data
             </div>
             <div class="card-body">
