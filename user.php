@@ -32,6 +32,7 @@ if (mysqli_num_rows($result) > 0) {
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="style.css" rel="stylesheet">
 	<title>Home CrowdFunding</title>
 </head>
@@ -101,7 +102,7 @@ if (mysqli_num_rows($result) > 0) {
 						<h5>Cancer Fighter</h5>
 						<p>Bantu tetangga kita agar segera sembuh dari kanker. Semangatnya yang tak pernah padam dalam
 							berjuang harus kita dukung!</p>
-						<p><a class="btn btn-success me-sm-3 mt-3" href="transaksi.php">Donate Now</a></p>
+						<p><a class="btn btn-success me-sm-3 mt-3" href="tzransaksi.php">Donate Now</a></p>
 					</div>
 				</div>
 				<div class="carousel-item">
@@ -119,7 +120,7 @@ if (mysqli_num_rows($result) > 0) {
 						<h5>Musholla Al-Ikhlas</h5>
 						<p>Bismillah. Pembangunan musholla ini akan bertempat di sekitar area Kampung 1. Donasi sekarang
 							agar memperoleh sedekah jariyah!</p>
-						<p><a class="btn btn-success me-sm-3 mt-3" href="transaksi.php">Donate Now</a></p>
+						<p><a class="btn btn-success me-sm-3 mt-3" href="#">Donate Now</a></p>
 					</div>
 				</div>
 			</div><button class="carousel-control-prev" data-bs-slide="prev"
@@ -227,53 +228,14 @@ if (mysqli_num_rows($result) > 0) {
 		</div>
 	</section><!-- kategori section Ends -->
 	<!-- donasi strats -->
-	<section class="donasi section-padding" id="donasi">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="section-header text-center pb-4">
-						<h2>Donasi Mendesak</h2>
-						<p>Utamakan membantu yang ada dibawah ini!</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12 col-md-12 col-lg-4">
-					<div class="card text-light text-center bg-white pb-2">
-						<div class="card-body text-dark">
-							<div class="img-area mb-4"><img alt="" class="img-fluid" src="Foto/home-2.jpeg"></div>
-							<h3 class="card-title">Nenek Sumiati</h3>
-							<p class="card-text">Menjadi tulang punggung keluarga di usianya yang sudah lanjut demi untuk menghidupi
-								cucu-cucunya. Luangkan sebagian hartamu untuk membantu si nenek!</p><button
-								class="btn btn-success" onclick="window.location.href='transaksi.php'">Donate Now</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-12 col-md-12 col-lg-4">
-					<div class="card text-light text-center bg-white pb-2">
-						<div class="card-body text-dark">
-							<div class="img-area mb-4"><img alt="" class="img-fluid" src="Foto/home-1.jpeg"></div>
-							<h3 class="card-title">Cancer Fighter</h3>
-							<p class="card-text">Bantu tetangga kita agar segera sembuh dari kanker. Semangatnya yang tak pernah padam dalam
-								berjuang harus kita dukung!</p><button
-								class="btn btn-success" onclick="window.location.href='transaksi.php'">Donate Now</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-12 col-md-12 col-lg-4">
-					<div class="card text-light text-center bg-white pb-2">
-						<div class="card-body text-dark">
-							<div class="img-area mb-4"><img alt="" class="img-fluid" src="Foto/home-3.jpeg"></div>
-							<h3 class="card-title">Musholla Al-Ikhlas</h3>
-							<p class="card-text">Bismillah. Pembangunan musholla ini akan bertempat di sekitar area Kampung 1. Donasi sekarang
-								agar memperoleh sedekah jariyah!</p><button
-								class="btn btn-success" onclick="window.location.href='transaksi.php'">Donate Now</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section><!-- donasi ends -->
+	<section id="donasi" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Daftar Donasi</h2>
+            <div class="row">
+                <?php include("tampilkan_donasi.php"); ?>
+            </div>
+        </div>
+    </section><!-- donasi end -->
 	<!-- berita starts -->
 	<section class="section-padding" id="berita">
 		<div class="container">
