@@ -101,7 +101,7 @@ if (mysqli_num_rows($result) > 0) {
 						<h5>Cancer Fighter</h5>
 						<p>Bantu tetangga kita agar segera sembuh dari kanker. Semangatnya yang tak pernah padam dalam
 							berjuang harus kita dukung!</p>
-						<p><a class="btn btn-success me-sm-3 mt-3" href="#">Donate Now</a></p>
+						<p><a class="btn btn-success me-sm-3 mt-3" href="transaksi.php">Donate Now</a></p>
 					</div>
 				</div>
 				<div class="carousel-item">
@@ -110,7 +110,7 @@ if (mysqli_num_rows($result) > 0) {
 						<h5>Nenek Sumiati</h5>
 						<p>Menjadi tulang punggung keluarga di usianya yang sudah lanjut demi untuk menghidupi
 							cucu-cucunya. Luangkan sebagian hartamu untuk membantu si nenek!</p>
-						<p><a class="btn btn-success me-sm-3 mt-3" href="#">Donate Now</a></p>
+						<p><a class="btn btn-success me-sm-3 mt-3" href="transaksi.php">Donate Now</a></p>
 					</div>
 				</div>
 				<div class="carousel-item">
@@ -119,7 +119,7 @@ if (mysqli_num_rows($result) > 0) {
 						<h5>Musholla Al-Ikhlas</h5>
 						<p>Bismillah. Pembangunan musholla ini akan bertempat di sekitar area Kampung 1. Donasi sekarang
 							agar memperoleh sedekah jariyah!</p>
-						<p><a class="btn btn-success me-sm-3 mt-3" href="#">Donate Now</a></p>
+						<p><a class="btn btn-success me-sm-3 mt-3" href="transaksi.php">Donate Now</a></p>
 					</div>
 				</div>
 			</div><button class="carousel-control-prev" data-bs-slide="prev"
@@ -245,7 +245,7 @@ if (mysqli_num_rows($result) > 0) {
 							<h3 class="card-title">Nenek Sumiati</h3>
 							<p class="card-text">Menjadi tulang punggung keluarga di usianya yang sudah lanjut demi untuk menghidupi
 								cucu-cucunya. Luangkan sebagian hartamu untuk membantu si nenek!</p><button
-								class="btn btn-success">Donate Now</button>
+								class="btn btn-success" onclick="window.location.href='transaksi.php'">Donate Now</button>
 						</div>
 					</div>
 				</div>
@@ -256,7 +256,7 @@ if (mysqli_num_rows($result) > 0) {
 							<h3 class="card-title">Cancer Fighter</h3>
 							<p class="card-text">Bantu tetangga kita agar segera sembuh dari kanker. Semangatnya yang tak pernah padam dalam
 								berjuang harus kita dukung!</p><button
-								class="btn btn-success">Donate Now</button>
+								class="btn btn-success" onclick="window.location.href='transaksi.php'">Donate Now</button>
 						</div>
 					</div>
 				</div>
@@ -267,7 +267,7 @@ if (mysqli_num_rows($result) > 0) {
 							<h3 class="card-title">Musholla Al-Ikhlas</h3>
 							<p class="card-text">Bismillah. Pembangunan musholla ini akan bertempat di sekitar area Kampung 1. Donasi sekarang
 								agar memperoleh sedekah jariyah!</p><button
-								class="btn btn-success">Donate Now</button>
+								class="btn btn-success" onclick="window.location.href='transaksi.php'">Donate Now</button>
 						</div>
 					</div>
 				</div>
