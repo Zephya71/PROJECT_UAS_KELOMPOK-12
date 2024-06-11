@@ -19,10 +19,23 @@ $op = isset($_GET['op']) ? $_GET['op'] : "";
 
 if ($op == 'delete') {
     $id = $_GET['id'];
-    $sql1 = "DELETE FROM campaign WHERE id = '$id'";
+    
+    // Fetch gambar filename from the database
+    $sql1 = "SELECT gambar FROM campaign WHERE id = '$id'";
     $q1 = mysqli_query($koneksi, $sql1);
-    if ($q1) {
-        $sukses = "Berhasil menghapus data";
+    $r1 = mysqli_fetch_array($q1);
+    $gambar = $r1['gambar'];
+
+    // Delete file from directory
+    if (file_exists('Foto/' . $gambar)) {
+        unlink('Foto/' . $gambar);
+    }
+
+    // Delete data from database
+    $sql2 = "DELETE FROM campaign WHERE id = '$id'";
+    $q2 = mysqli_query($koneksi, $sql2);
+    if ($q2) {
+        $sukses = "Berhasil menghapus data dan gambar";
     } else {
         $error = "Gagal menghapus data";
     }
@@ -106,145 +119,164 @@ if (isset($_POST['simpan'])) {
         </div>
     </header>
 
-        <!-- memasukkan data -->
-        <div class="card mt-4">
-            <div class="card-header text-white bg-secondary">
-                Input Data
-            </div>
-            <div class="card-body">
-                <?php if ($error) { ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?php echo $error ?>
-                    </div>
-                <?php
-                    header("refresh:5;url=admin.php");
-                }
-                ?>
-                <?php if ($sukses) { ?>
-                    <div class="alert alert-success" role="alert">
-                        <?php echo $sukses ?>
-                    </div>
-                <?php
-                    header("refresh:5;url=admin.php");
-                }
-                ?>
-                <form enctype="multipart/form-data" action="" method="POST">
-                    <div class="mb-3 row">
-                        <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
-                        <div class="col-sm-10">
-                        <div class="input-group">
-                            <input type="file" class="form-control" id="inputGroupFile04" name="gambar" value="<?php echo $gambar ?>">
-                        </div>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="nama_campaign" class="col-sm-2 col-form-label">Nama Campaign</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nama_campaign" name="nama_campaign" value="<?php echo $nama_campaign ?>">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
-                        <div class="col-sm-10">
-                            <select class="form-select" name="kategori" id="kategori">
-                                <option value="">- Pilih Kategori -</option>
-                                <option value="Kesehatan" <?php if ($kategori == "Kesehatan") echo "selected" ?>>Kesehatan</option>
-                                <option value="Pendidikan" <?php if ($kategori == "Pendidikan") echo "selected" ?>>Pendidikan</option>
-                                <option value="Kemanusiaan" <?php if ($kategori == "Kemanusiaan") echo "selected" ?>>Kemanusiaan</option>
-                                <option value="Bencana" <?php if ($kategori == "Bencana") echo "selected" ?>>Bencana Alam</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="<?php echo $deskripsi ?>">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="target_dana" class="col-sm-2 col-form-label">Target Dana</label>
-                        <div class="col-sm-10">
-                            <div class="input-group mb-3">
-                                <span for="target_dana" class="input-group-text">Rp.</span>
-                                <input type="number" class="form-control" id="target_dana" name="target_dana" value="<?php echo $target_dana ?>">
-                                <span class="input-group-text">.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label for="status" class="col-sm-2 col-form-label">Status Campaign</label>
-                        <div class="col-sm-10">
-                            <select class="form-select" name="status" id="status">
-                                <option value="">- Pilih Status -</option>
-                                <option value="Aktif" <?php if ($status == "Aktif") echo "selected" ?>>Aktif</option>
-                                <option value="Selesai" <?php if ($status == "Selesai") echo "selected" ?>>Selesai</option>
-                                <option value="Gagal" <?php if ($status == "Gagal") echo "selected" ?>>Gagal</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="text-end">
-                        <input type="submit" name="simpan" value="Simpan Data" class="btn btn-primary" />
-                    </div>
-                </form>
-            </div>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="bg-dark p-3" id="sidebar">
+            <h3 class="text-white">Menu</h3>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="admin.php">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#inputData">Input Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#dataCampaign">Data Campaign</a>
+                </li>
+            </ul>
         </div>
 
-        <!-- menampilkan data -->
-        <div class="card mt-4">
-            <div class="card-header text-white bg-secondary">
-                Data Campaign
+        <!-- Content -->
+        <div class="container-fluid">
+            <!-- memasukkan data -->
+            <div class="card mt-4" id="inputData">
+                <div class="card-header text-white bg-secondary">
+                    Input Data
+                </div>
+                <div class="card-body">
+                    <?php if ($error) { ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo $error ?>
+                        </div>
+                    <?php
+                        header("refresh:5;url=admin.php");
+                    }
+                    ?>
+                    <?php if ($sukses) { ?>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo $sukses ?>
+                        </div>
+                    <?php
+                        header("refresh:5;url=admin.php");
+                    }
+                    ?>
+                    <form enctype="multipart/form-data" action="" method="POST">
+                        <div class="mb-3 row">
+                            <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <input type="file" class="form-control" id="inputGroupFile04" name="gambar" value="<?php echo $gambar ?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="nama_campaign" class="col-sm-2 col-form-label">Nama Campaign</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="nama_campaign" name="nama_campaign" value="<?php echo $nama_campaign ?>">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
+                            <div class="col-sm-10">
+                                <select class="form-select" name="kategori" id="kategori">
+                                    <option value="">- Pilih Kategori -</option>
+                                    <option value="Kesehatan" <?php if ($kategori == "Kesehatan") echo "selected" ?>>Kesehatan</option>
+                                    <option value="Pendidikan" <?php if ($kategori == "Pendidikan") echo "selected" ?>>Pendidikan</option>
+                                    <option value="Kemanusiaan" <?php if ($kategori == "Kemanusiaan") echo "selected" ?>>Kemanusiaan</option>
+                                    <option value="Bencana" <?php if ($kategori == "Bencana") echo "selected" ?>>Bencana Alam</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="deskripsi" name="deskripsi" value="<?php echo $deskripsi ?>">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="target_dana" class="col-sm-2 col-form-label">Target Dana</label>
+                            <div class="col-sm-10">
+                                <div class="input-group mb-3">
+                                    <span for="target_dana" class="input-group-text">Rp.</span>
+                                    <input type="number" class="form-control" id="target_dana" name="target_dana" value="<?php echo $target_dana ?>">
+                                    <span class="input-group-text">.00</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="status" class="col-sm-2 col-form-label">Status Campaign</label>
+                            <div class="col-sm-10">
+                                <select class="form-select" name="status" id="status">
+                                    <option value="">- Pilih Status -</option>
+                                    <option value="Aktif" <?php if ($status == "Aktif") echo "selected" ?>>Aktif</option>
+                                    <option value="Selesai" <?php if ($status == "Selesai") echo "selected" ?>>Selesai</option>
+                                    <option value="Gagal" <?php if ($status == "Gagal") echo "selected" ?>>Gagal</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <input type="submit" name="simpan" value="Simpan Data" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="card-body">
-                <table class="table">
-                    <thead>
-                        <tr class="text-center">
-                            <th scope="col">No.</th>
-                            <th scope="col">Gambar</th>
-                            <th scope="col">Nama Campaign</th>
-                            <th scope="col">Kategori</th>
-                            <th scope="col" width="30%">Deskripsi</th>
-                            <th scope="col">Target Dana</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $sql2 = "SELECT * from campaign order by gambar desc";
-                        $q2 = mysqli_query($koneksi, $sql2);
-                        $urut = 1;
-                        while ($r2 = mysqli_fetch_array($q2)) {
-                            $id = $r2['id'];
-                            $gambar = $r2['gambar'];
-                            $nama_campaign = $r2['nama_campaign'];
-                            $kategori = $r2['kategori'];
-                            $deskripsi = $r2['deskripsi'];
-                            $target_dana = $r2['target_dana'];
-                            $status = $r2['status'];
-                        ?>
+
+            <!-- menampilkan data -->
+            <div class="card mt-4" id="dataCampaign">
+                <div class="card-header text-white bg-secondary">
+                    Data Campaign
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
                             <tr class="text-center">
-                                <th scope="row"><?php echo $urut++ ?></th>
-                                <td>
-                                    <img src="Foto/<?php echo $gambar ?>" width="160px">
-                                </td>
-                                <td><?php echo $nama_campaign ?></td>
-                                <td><?php echo $kategori ?></td>
-                                <td><?php echo $deskripsi ?></td>
-                                <td>Rp. <?php echo number_format($target_dana) ?></td>
-                                <td><?php echo $status ?></td>
-                                <td>
-                                    <a href="admin.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-warning">Edit</button></a>
-                                    <a href="admin.php?op=delete&id=<?php echo $id ?>" onclick="return confirm('Apakah yakin mau delete data?')"><button type="button" class="btn btn-danger">Delete</button></a>
-                                </td>
+                                <th scope="col">No.</th>
+                                <th scope="col">Gambar</th>
+                                <th scope="col">Nama Campaign</th>
+                                <th scope="col">Kategori</th>
+                                <th scope="col" width="30%">Deskripsi</th>
+                                <th scope="col">Target Dana</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Aksi</th>
                             </tr>
-                        <?php
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sql2 = "SELECT * from campaign order by gambar desc";
+                            $q2 = mysqli_query($koneksi, $sql2);
+                            $urut = 1;
+                            while ($r2 = mysqli_fetch_array($q2)) {
+                                $id = $r2['id'];
+                                $gambar = $r2['gambar'];
+                                $nama_campaign = $r2['nama_campaign'];
+                                $kategori = $r2['kategori'];
+                                $deskripsi = $r2['deskripsi'];
+                                $target_dana = $r2['target_dana'];
+                                $status = $r2['status'];
+                            ?>
+                                <tr class="text-center">
+                                    <th scope="row"><?php echo $urut++ ?></th>
+                                    <td>
+                                        <img src="Foto/<?php echo $gambar ?>" width="160px">
+                                    </td>
+                                    <td><?php echo $nama_campaign ?></td>
+                                    <td><?php echo $kategori ?></td>
+                                    <td><?php echo $deskripsi ?></td>
+                                    <td>Rp. <?php echo number_format($target_dana) ?></td>
+                                    <td><?php echo $status ?></td>
+                                    <td>
+                                        <a href="admin.php?op=edit&id=<?php echo $id ?>"><button type="button" class="btn btn-warning">Edit</button></a>
+                                        <a href="admin.php?op=delete&id=<?php echo $id ?>" onclick="return confirm('Apakah yakin mau delete data?')"><button type="button" class="btn btn-danger">Delete</button></a>
+                                    </td>
+                                </tr>
+                            <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
 
