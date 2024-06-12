@@ -36,6 +36,9 @@ body {
 	font-size: 18px;
 	line-height: 1.9;
 }
+.card {
+	border-radius: 10px;
+}
 .home .carousel-inner:before {
 	content: '';
 	position: absolute;
