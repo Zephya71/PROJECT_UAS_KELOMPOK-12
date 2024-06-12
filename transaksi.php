@@ -24,19 +24,23 @@ if (mysqli_num_rows($result) > 0) {
     $nama_user = "Nama Pengguna"; // Atur nama default jika tidak ditemukan dalam database
 }
 
+// Get campaign_id from URL
+$campaign_id = isset($_GET['id']) ? $_GET['id'] : null;
+
 if (isset($_POST['submit'])) {
     $jumlah = $_POST['jumlah'];
     $tanggal_transaksi = $_POST['tanggal_transaksi'];
+    $campaign_id = $_POST['id'];
 
     $extensi = explode(".", $_FILES['bukti_transaksi']['name']);
     $gambar  = "bukti-".round(microtime(true)).".".end($extensi);
     $bukti_transaksi  = $_FILES['bukti_transaksi']['tmp_name'];
     $upload = move_uploaded_file($bukti_transaksi, 'bukti_trf/'.$gambar);
 
-    if ($upload && $nama_user && $jumlah && $tanggal_transaksi) {
+    if ($upload && $nama_user && $jumlah && $tanggal_transaksi && $campaign_id) {
         $bukti_data = addslashes(file_get_contents('bukti_trf/'.$gambar));
 
-        $sql = "INSERT INTO transaksi (nama_user, jumlah, tanggal_transaksi, bukti_transaksi) VALUES ('$nama_user', '$jumlah', '$tanggal_transaksi', '$bukti_transaksi')";
+        $sql = "INSERT INTO transaksi (nama_user, jumlah, tanggal_transaksi, bukti_transaksi, id) VALUES ('$nama_user', '$jumlah', '$tanggal_transaksi', '$bukti_data', '$campaign_id')";
         $query = mysqli_query($koneksi, $sql);
 
         if ($query) {
@@ -90,6 +94,12 @@ if (isset($_POST['submit'])) {
                         <label for="tanggal_transaksi" class="col-sm-2 col-form-label">Tanggal Transaksi</label>
                         <div class="col-sm-10">
                             <input type="date" class="form-control" id="tanggal_transaksi" name="tanggal_transaksi" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="id" class="col-sm-2 col-form-label">Campaign ID</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="id" name="id" value="<?php echo $campaign_id; ?>" readonly>
                         </div>
                     </div>
                     <div class="mb-3 row">
