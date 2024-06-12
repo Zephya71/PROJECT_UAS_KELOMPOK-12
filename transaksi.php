@@ -25,22 +25,22 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 // Get campaign_id from URL
-$campaign_id = isset($_GET['id']) ? $_GET['id'] : null;
+$id = isset($_GET['id']) ? $_GET['id'] : null;
 
 if (isset($_POST['submit'])) {
     $jumlah = $_POST['jumlah'];
     $tanggal_transaksi = $_POST['tanggal_transaksi'];
-    $campaign_id = $_POST['id'];
+    $id = $_POST['id'];
 
     $extensi = explode(".", $_FILES['bukti_transaksi']['name']);
     $gambar  = "bukti-".round(microtime(true)).".".end($extensi);
     $bukti_transaksi  = $_FILES['bukti_transaksi']['tmp_name'];
     $upload = move_uploaded_file($bukti_transaksi, 'bukti_trf/'.$gambar);
 
-    if ($upload && $nama_user && $jumlah && $tanggal_transaksi && $campaign_id) {
+    if ($upload && $nama_user && $jumlah && $tanggal_transaksi && $id) {
         $bukti_data = addslashes(file_get_contents('bukti_trf/'.$gambar));
 
-        $sql = "INSERT INTO transaksi (nama_user, jumlah, tanggal_transaksi, bukti_transaksi, id) VALUES ('$nama_user', '$jumlah', '$tanggal_transaksi', '$bukti_data', '$campaign_id')";
+        $sql = "INSERT INTO transaksi (nama_user, jumlah, tanggal_transaksi, bukti_transaksi, id) VALUES ('$nama_user', '$jumlah', '$tanggal_transaksi', '$bukti_transaksi', '$id')";
         $query = mysqli_query($koneksi, $sql);
 
         if ($query) {
@@ -99,7 +99,7 @@ if (isset($_POST['submit'])) {
                     <div class="mb-3 row">
                         <label for="id" class="col-sm-2 col-form-label">Campaign ID</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="id" name="id" value="<?php echo $campaign_id; ?>" readonly>
+                            <input type="number" class="form-control" id="id" name="id" value="<?php echo $id; ?>" readonly>
                         </div>
                     </div>
                     <div class="mb-3 row">
@@ -110,6 +110,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="mb-3 row">
                         <div class="col-sm-10 offset-sm-2">
+                        <a href="user.php"><button type="button" class="btn btn-warning">kembali</button></a>
                             <button type="submit" name="submit" class="btn btn-primary">Kirim</button>
                         </div>
                     </div>

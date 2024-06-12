@@ -125,13 +125,13 @@ if (isset($_POST['simpan'])) {
             <h3 class="text-white">Menu</h3>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="admin.php">Dashboard</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link text-white" href="#inputData">Input Data</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="#dataCampaign">Data Campaign</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="laporanview.php">Lihat laporan transaksi</a>
                 </li>
             </ul>
         </div>

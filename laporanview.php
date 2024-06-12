@@ -97,7 +97,8 @@ if(isset($_POST['btnTampil'])) {
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
-                        <a href="laporan/cetak.php?awal=<?php echo $tglAwal; ?>&&akhir=<?php echo $tglAkhir; ?>" target="_blank" alt="Edit Data" class="btn btn-primary">Cetak Laporan</a>
+                    <a href="admin.php"><button type="button" class="btn btn-warning">kembali</button></a> 
+                    <a href="laporan/cetak.php?awal=<?php echo $tglAwal; ?>&&akhir=<?php echo $tglAkhir; ?>" target="_blank" alt="Edit Data" class="btn btn-primary">Cetak Laporan</a>
                     </div>
                 </div> 
             </div>
