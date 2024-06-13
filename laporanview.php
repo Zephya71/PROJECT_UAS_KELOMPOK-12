@@ -38,10 +38,11 @@ if(isset($_POST['btnTampil'])) {
 <body>
 <div class="page shopping-cart-page">
     <div class="container-fluid">
-        <h1 class="text-dark mb-4">Laporan Transaksi</h1>
-        <h4>Periode Tanggal <b><?php echo ($tglAwal); ?></b> s/d <b><?php echo ($tglAkhir); ?></b></h4>
+        <h2 class="text-dark mt-4 mb-4 text-center" >LAPORAN DONASI</h2>
+        
         <div class="card shadow">
-            <div class="card-header py-3">
+            <div class="text-dark card-header py-3 text-lg-start">
+            <h4>Periode tanggal <b><?php echo ($tglAwal); ?></b> s/d <b><?php echo ($tglAkhir); ?></b></h4>
             </div>
             <div class="card-body">
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form10" target="_self">
@@ -64,8 +65,8 @@ if(isset($_POST['btnTampil'])) {
                                 <th>No.</th>
                                 <th>Nama User</th>
                                 <th>Judul Campaign</th>
-                                <th>Kategori Donasi</th>
-                                <th>Tanggal Transaksi</th>
+                                <th>Kategori Campaign</th>
+                                <th>Tanggal Donasi</th>
                                 <th>Jumlah Donasi</th>
                             </tr>
                         </thead>
@@ -78,7 +79,9 @@ if(isset($_POST['btnTampil'])) {
                                     $SqlPeriode";                                
                             $q2 = mysqli_query($koneksi, $Sql);
                             $nomor = 0;
+                            $jumlah = 0;
                             while ($myData = mysqli_fetch_array($q2)) {    
+                                $jumlah += $myData['jumlah'];
                                 $nomor++;      
                         ?>
                             <tr>                        
@@ -87,18 +90,24 @@ if(isset($_POST['btnTampil'])) {
                                 <td><?php echo $myData['nama_campaign'];?></td> 
                                 <td><?php echo $myData['kategori'];?></td>                                        
                                 <td><?php echo $myData['tanggal_transaksi'];?></td>
-                                <td>Rp. <?php echo number_format($myData['jumlah']);?></td> 
+                                <td>Rp. <?php echo number_format($myData['jumlah']);?>,-</td> 
                             </tr>
                         <?php
                             } 
                         ?>
                         </tbody>
+                        <tfoot>
+                            <tr class="bg-light">
+                                <td colspan="5" class="text-end"><strong>Total Donasi :  </strong></td>
+                                <td><strong>Rp. <?php echo number_format($jumlah); ?>,-</strong></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
                 <div class="row">
                     <div class="col-lg-3">
-                    <a href="admin.php"><button type="button" class="btn btn-warning">kembali</button></a> 
-                    <a href="laporan/cetak.php?awal=<?php echo $tglAwal; ?>&&akhir=<?php echo $tglAkhir; ?>" target="_blank" alt="Edit Data" class="btn btn-primary">Cetak Laporan</a>
+                    <a href="admin.php"><button type="button" class="btn btn-warning">Kembali</button></a> 
+                    <a href="cetak.php?awal=<?php echo $tglAwal; ?>&&akhir=<?php echo $tglAkhir; ?>" target="_blank" alt="Edit Data" class="btn btn-primary">Cetak Laporan</a>
                     </div>
                 </div> 
             </div>
