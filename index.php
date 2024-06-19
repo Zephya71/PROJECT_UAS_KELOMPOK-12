@@ -19,7 +19,7 @@
 
 				// Kirim permintaan AJAX ke server untuk filter kategori
 				$.ajax({
-					url: 'donasi_anonim.php',
+					url: 'filter_donasi_user.php',
 					method: 'POST',
 					data: {
 						filter_category: selectedCategory
@@ -164,7 +164,7 @@
                             <div class="berita-text">
                                 <h2>Mewujudkan Mimpi Pendidikan untuk Generasi Masa Depan</h2>
                                 <p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
-                                <a class="btn btn-outline-success" href="baca_selengkapnya.php?id=1">Baca Selengkapnya</a>
+                                <a class="btn btn-outline-success" href="baca_selengkapnya_penhunjung.php?id=1">Baca Selengkapnya</a>
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                             <div class="berita-text">
                                 <h2>Membangun Harapan untuk Anak Yatim</h2>
                                 <p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
-                                <a class="btn btn-outline-success" href="baca_selengkapnya.php?id=2">Baca Selengkapnya</a>
+                                <a class="btn btn-outline-success" href="baca_selengkapnya.php_penhunjung?id=2">Baca Selengkapnya</a>
                             </div>
                         </div>
                     </div>
@@ -196,7 +196,7 @@
                             <div class="berita-text">
                                 <h2>Bangun Jembatan untuk Masa Depan yang Lebih Terhubung</h2>
                                 <p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
-                                <a class="btn btn-outline-success" href="baca_selengkapnya.php?id=3">Baca Selengkapnya</a>
+                                <a class="btn btn-outline-success" href="baca_selengkapnya.php_penhunjung?id=3">Baca Selengkapnya</a>
                             </div>
                         </div>
                     </div>

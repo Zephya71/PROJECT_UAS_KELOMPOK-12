@@ -40,7 +40,7 @@ if (mysqli_num_rows($result) > 0) {
         echo '<div class="progress-bar" role="progressbar" style="width: ' . $persentase_terkumpul . '%; background-color: #90ee90; color: black;" aria-valuenow="' . $persentase_terkumpul . '" aria-valuemin="0" aria-valuemax="100">' . number_format($persentase_terkumpul, 2) . '%</div>';
         echo '</div>';
         echo '<p class="card-text mt-2"><strong>Dana Terkumpul:</strong> Rp. ' . number_format($row['dana_terkumpul']) . '</p>';
-        echo '<a href="transaksi.php?id=' . $row['id'] . '" class="btn btn-primary btn-success mt-auto">Donate Now</a>';
+        echo '<a href="transaksi_anonim.php?id=' . $row['id'] . '" class="btn btn-primary btn-success mt-auto">Donate Now</a>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
