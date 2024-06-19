@@ -194,7 +194,7 @@ if (mysqli_num_rows($result) > 0) {
 										<div class="berita-text">
 											<h2>Mewujudkan Mimpi Pendidikan untuk Generasi Masa Depan</h2>
 											<p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
-											<a class="btn btn-outline-success" href="#">Read More</a>
+											<a class="btn btn-outline-success" href="berita.php">Baca Selengkapnya</a>
 										</div>
 									</div>
 								</div>
@@ -211,7 +211,7 @@ if (mysqli_num_rows($result) > 0) {
 											<h2>Membangun Harapan untuk Anak Yatim<br>
 											</h2>
 											<p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
-											<a class="btn btn-outline-success" href="#">Read More</a>
+											<a class="btn btn-outline-success" href="#">Baca Selengkapnya</a>
 										</div>
 									</div>
 								</div>
@@ -228,7 +228,7 @@ if (mysqli_num_rows($result) > 0) {
 											<h2>Bangun Jembatan untuk Masa Depan yang Lebih Terhubung<br>
 											</h2>
 											<p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
-											<a class="btn btn-outline-success" href="#">Read More</a>
+											<a class="btn btn-outline-success" href="#">Baca Selengkapnya</a>
 										</div>
 									</div>
 								</div>
