@@ -1,25 +1,3 @@
-<?php
-session_start();
-include("inc_koneksi.php");
-
-// Periksa apakah pengguna sudah login, jika tidak, alihkan ke halaman login
-if (!isset($_SESSION['user_username'])) {
-	header("location:login.php");
-	exit; // Penting untuk menghentikan eksekusi skrip setelah melakukan pengalihan header
-}
-
-// Ambil nama user dari database
-$user_username = $_SESSION['user_username'];
-$sql = "SELECT nama_user FROM user WHERE username = '$user_username'";
-$result = mysqli_query($koneksi, $sql);
-
-if (mysqli_num_rows($result) > 0) {
-	$row = mysqli_fetch_assoc($result);
-	$nama_user = $row['nama_user'];
-} else {
-	$nama_user = "Nama Pengguna"; // Atur nama default jika tidak ditemukan dalam database
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +19,7 @@ if (mysqli_num_rows($result) > 0) {
 
 				// Kirim permintaan AJAX ke server untuk filter kategori
 				$.ajax({
-					url: 'filter_donasi.php',
+					url: 'filter_donasi_user.php',
 					method: 'POST',
 					data: {
 						filter_category: selectedCategory
@@ -76,7 +54,7 @@ if (mysqli_num_rows($result) > 0) {
 						<a class="nav-link" href="#berita">Berita</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#about">Tentang kami</a>
+						<a class="nav-link" href="#tentang-kami">Tentang kami</a>
 					</li>
 				</ul>
 				<form class="d-flex">
@@ -85,17 +63,8 @@ if (mysqli_num_rows($result) > 0) {
 						<i class="bi bi-search"></i>
 					</button>
 				</form>
-
+				<a class="btn btn-light ms-2" href="login.php">Login</a>
 			</div>
-		</div>
-		<div class="dropdown">
-			<a class="btn btn-light dropdown-toggle d-flex align-items-center me-2" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-				<img src="foto/foto profil v1.png" alt="Profile" class="rounded-circle" width="30" height="30">
-				<span class="ms-2"><?php echo $nama_user; ?></span>
-			</a>
-			<ul class="dropdown-menu dropdown-menu-end bg-danger" aria-labelledby="dropdownMenuLink">
-				<li><a class="dropdown-item bg-danger text-white" href="logout.php">Logout</a></li>
-			</ul>
 		</div>
 	</nav>
 	<div class="home" id="home">
@@ -134,7 +103,7 @@ if (mysqli_num_rows($result) > 0) {
 			<button class="carousel-control-next" data-bs-slide="next" data-bs-target="#carouselExampleIndicators" type="button"><span aria-hidden="true" class="carousel-control-next-icon"></span> <span class="visually-hidden">Next</span></button>
 		</div>
 	</div><!-- about section starts -->
-	<section class="about section-padding">
+	<section class="about section-padding" id="about">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4 col-md-12 col-12">
@@ -142,9 +111,10 @@ if (mysqli_num_rows($result) > 0) {
 				</div>
 				<div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
 					<div class="about-text">
-						<h2>Selamat Datang, <?php echo $nama_user; ?>!</h2>
+						<h2>Selamat Datang ! </h2>
 						<p>Yuk, mari kita bersama-sama memberikan kebaikan kepada yang membutuhkan. Setiap sedekah kita
-							adalah sinar harapan bagi orang lain.</p><a class="btn btn-outline-success" href="#about">Learn More</a>
+							adalah sinar harapan bagi orang lain.</p><a class="btn btn-outline-success" href="#tentang-kami">Learn
+							More</a>
 					</div>
 				</div>
 			</div>
@@ -182,59 +152,68 @@ if (mysqli_num_rows($result) > 0) {
 				</div>
 			</div>
 			<div class="berita">
-				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<div class="single-item">
-								<div class="row">
-									<div class="col-lg-4 col-md-12 col-12">
-										<div class="berita-img"><img alt="" class="img-fluid" src="Foto/berita_1.jpg"></div>
-									</div>
-									<div class="col-lg-8 col-md-12 col-12 ps-lg-4">
-										<div class="berita-text">
-											<h2>Mewujudkan Mimpi Pendidikan untuk Generasi Masa Depan</h2>
-											<p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
-											<a class="btn btn-outline-success" href="berita.php">Baca Selengkapnya</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="carousel-item">
-							<div class="single-item">
-								<div class="row">
-									<div class="col-lg-4 col-md-12 col-12">
-										<div class="berita-img"><img alt="" class="img-fluid" src="Foto/berita_3.jpg"></div>
-									</div>
-									<div class="col-lg-8 col-md-12 col-12 ps-lg-4">
-										<div class="berita-text">
-											<h2>Membangun Harapan untuk Anak Yatim<br>
-											</h2>
-											<p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
-											<a class="btn btn-outline-success" href="#">Baca Selengkapnya</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="carousel-item">
-							<div class="single-item">
-								<div class="row">
-									<div class="col-lg-4 col-md-12 col-12">
-										<div class="berita-img"><img alt="" class="img-fluid" src="Foto/berita_2.jpg"></div>
-									</div>
-									<div class="col-lg-8 col-md-12 col-12 ps-lg-4">
-										<div class="berita-text">
-											<h2>Bangun Jembatan untuk Masa Depan yang Lebih Terhubung<br>
-											</h2>
-											<p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
-											<a class="btn btn-outline-success" href="#">Baca Selengkapnya</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="single-item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12 col-12">
+                            <div class="berita-img"><img alt="" class="img-fluid" src="Foto/berita_1.jpg"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-12 ps-lg-4">
+                            <div class="berita-text">
+                                <h2>Mewujudkan Mimpi Pendidikan untuk Generasi Masa Depan</h2>
+                                <p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
+                                <a class="btn btn-outline-success" href="baca_selengkapnya_penhunjung.php?id=1">Baca Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="single-item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12 col-12">
+                            <div class="berita-img"><img alt="" class="img-fluid" src="Foto/berita_3.jpg"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-12 ps-lg-4">
+                            <div class="berita-text">
+                                <h2>Membangun Harapan untuk Anak Yatim</h2>
+                                <p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
+                                <a class="btn btn-outline-success" href="baca_selengkapnya.php_penhunjung?id=2">Baca Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="single-item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12 col-12">
+                            <div class="berita-img"><img alt="" class="img-fluid" src="Foto/berita_2.jpg"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-12 ps-lg-4">
+                            <div class="berita-text">
+                                <h2>Bangun Jembatan untuk Masa Depan yang Lebih Terhubung</h2>
+                                <p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
+                                <a class="btn btn-outline-success" href="baca_selengkapnya.php_penhunjung?id=3">Baca Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
 					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
 						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 						<span class="visually-hidden">Previous</span>
@@ -247,9 +226,9 @@ if (mysqli_num_rows($result) > 0) {
 
 			</div>
 		</div>
-	</section><!-- berita ends -->
+	</section><!-- berita Ends -->
 	<!-- about section Starts -->
-	<section id="about" class="py-5 bg-light">
+	<section id="tentang-kami" class="py-5 bg-light">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-10">
@@ -266,11 +245,19 @@ if (mysqli_num_rows($result) > 0) {
 					<p class="text-justify">
 						Kami berdedikasi untuk menyediakan pengalaman donasi yang aman, transparan, dan efisien. Dengan beragam pilihan kampanye yang tersedia, kami berharap dapat menginspirasi lebih banyak orang untuk bergabung dalam misi kami untuk membuat dunia menjadi tempat yang lebih baik.
 					</p>
+					<div class="text-center mt-4">
+						<a href="login.php" class="btn btn-primary btn-lg">Bergabung dengan Kami</a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 	><!-- about section Ends -->
+	<footer class="bg-dark p-2 text-center">
+		<div class="container">
+			<p class="text-white">© 2024 CareBridge by Kelompok 12</p>
+		</div>
+	</footer>
 </body>
 
 </html>

@@ -6,15 +6,10 @@ include("inc_koneksi.php");
 $filterCategory = isset($_POST['filter_category']) ? $_POST['filter_category'] : '';
 
 // Query untuk mengambil data donasi berdasarkan kategori yang dipilih
-$sql = "SELECT c.*, COALESCE(SUM(t.jumlah), 0) as dana_terkumpul
-        FROM campaign c
-        LEFT JOIN transaksi t ON c.id = t.id";
-
+$sql = "SELECT * FROM campaign";
 if (!empty($filterCategory)) {
-    $sql .= " WHERE c.kategori = '$filterCategory'";
+    $sql .= " WHERE kategori = '$filterCategory'";
 }
-
-$sql .= " GROUP BY c.id";
 
 $result = mysqli_query($koneksi, $sql);
 
@@ -22,10 +17,6 @@ $result = mysqli_query($koneksi, $sql);
 if (mysqli_num_rows($result) > 0) {
     // Loop melalui setiap baris data
     while ($row = mysqli_fetch_assoc($result)) {
-        // Hitung persentase dana yang terkumpul
-        $persentase_terkumpul = ($row['dana_terkumpul'] / $row['target_dana']) * 100;
-        $sisa_target_dana = $row['target_dana'] - $row['dana_terkumpul'];
-        
         // Tampilkan informasi donasi
         echo '<div class="col-md-4 mb-4">';
         echo '<div class="card h-100 shadow-sm">';
@@ -35,12 +26,7 @@ if (mysqli_num_rows($result) > 0) {
         echo '<p class="card-text"><strong>Kategori:</strong> ' . $row['kategori'] . '</p>';
         echo '<p class="card-text flex-grow-1"><strong>Deskripsi:</strong> ' . $row['deskripsi'] . '</p>';
         echo '<p class="card-text"><strong>Target Dana:</strong> Rp. ' . number_format($row['target_dana']) . '</p>';
-        echo '<p class="card-text"><strong>Sisa Target Dana:</strong> Rp. ' . number_format($sisa_target_dana) . '</p>';
-        echo '<div class="progress" style="height: 20px;">';
-        echo '<div class="progress-bar" role="progressbar" style="width: ' . $persentase_terkumpul . '%; background-color: #90ee90; color: black;" aria-valuenow="' . $persentase_terkumpul . '" aria-valuemin="0" aria-valuemax="100">' . number_format($persentase_terkumpul, 2) . '%</div>';
-        echo '</div>';
-        echo '<p class="card-text mt-2"><strong>Dana Terkumpul:</strong> Rp. ' . number_format($row['dana_terkumpul']) . '</p>';
-        echo '<a href="transaksi.php?id=' . $row['id'] . '" class="btn btn-primary btn-success mt-auto">Donate Now</a>';
+        echo '<a href="transaksi_anonim.php?id=' . $row['id'] . '" class="btn btn-primary mt-auto">Donate Now</a>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
