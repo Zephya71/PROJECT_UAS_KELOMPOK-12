@@ -92,7 +92,24 @@ if (isset($_POST['simpan'])) {
         $error = "Silahkan memasukkan semua data";
     }
 }
-$tanggal_transaksi_query = "SELECT DATE_FORMAT(tanggal_transaksi, '%M %Y') as bulan, SUM(jumlah) as total_pembayaran 
+$kesehatan_query = "SELECT COUNT(*) as count FROM campaign WHERE kategori = 'Kesehatan'";
+  $kesehatan_result = mysqli_query($koneksi, $kesehatan_query);
+  $kesehatan_count = mysqli_fetch_assoc($kesehatan_result)['count'];
+
+  $pendidikan_query = "SELECT COUNT(*) as count FROM campaign WHERE kategori = 'Pendidikan'";
+  $pendidikan_result = mysqli_query($koneksi, $pendidikan_query);
+  $pendidikan_count = mysqli_fetch_assoc($pendidikan_result)['count'];
+
+  $kemanusiaan_query = "SELECT COUNT(*) as count FROM campaign WHERE kategori = 'Kemanusiaan'";
+  $kemanusiaan_result = mysqli_query($koneksi, $kemanusiaan_query);
+  $kemanusiaan_count = mysqli_fetch_assoc($kemanusiaan_result)['count'];
+
+  $bencana_query = "SELECT COUNT(*) as count FROM campaign WHERE kategori = 'Bencana'";
+  $bencana_result = mysqli_query($koneksi, $bencana_query);
+  $bencana_count = mysqli_fetch_assoc($bencana_result)['count'];
+
+  // Test 6(Start)
+  $tanggal_transaksi_query = "SELECT DATE_FORMAT(tanggal_transaksi, '%M %Y') as bulan, SUM(jumlah) as total_pembayaran 
                              FROM transaksi GROUP BY DATE_FORMAT(tanggal_transaksi, '%M %Y')
                              ORDER BY DATE_FORMAT(tanggal_transaksi, '%Y-%m')";
   $tanggal_transaksi_result = mysqli_query($koneksi, $tanggal_transaksi_query);
@@ -322,25 +339,52 @@ $tanggal_transaksi_query = "SELECT DATE_FORMAT(tanggal_transaksi, '%M %Y') as bu
 			</div>
 
 		<!-- Line Chart -->
-		<div class="container">
-    		<div class="row justify-content-center">
-        		<div class="col-lg-11">
-            		<div class="card-box shadow mb-4">
-                	<!-- Card Header -->
-                		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    		<h4 class="m-0 font-weight-bold">Nominal Donasi Keseluruhan</h4>
-                		</div>
-                	<!-- Card Body -->
-                	<div class="card-body">
-                    	<div class="chart-area text-center"> 
-                    		<canvas id="myLineChart"></canvas>
-                    	</div>
-                	</div>
-            		</div>
-        		</div>
-    		</div>
+		<div class="row">
+			<div class="col-xl-8 col-lg-7">
+				<div class="card shadow mb-4">
+		<!-- Card Header -->
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold ">Nominal Donasi Keseluruhan</h6>
+				</div>
+		<!-- Card Body -->
+				<div class="card-body">
+					<div class="chart-area">
+						<canvas id="myLineChart"></canvas>
+					</div>
+				</div>
+			</div>
 		</div>
-		
+
+		<!-- Pie Chart -->
+		<div class="col-xl-4 col-lg-5">
+			<div class="card shadow mb-4">
+			<!-- Card Header - Dropdown -->
+			<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+				<h6 class="m-0 font-weight-bold">Nomial Donasi Per-Kategori</h6>
+			</div>
+			<!-- Card Body -->
+			<div class="card-body">
+			<div class="chart-pie pt-4 pb-2">
+				<canvas id="myPieChart"></canvas>
+			</div>
+			<div class="mt-4 text-center small">
+				<span class="mr-4">
+					<i class="fas fa-circle text-success"></i> Kesehatan
+				</span>
+				<span class="mr-4">
+					<i class="fas fa-circle text-danger"></i> Pendidikan
+				</span>
+				<span class="mr-4">
+					<i class="fas fa-circle text-primary"></i> Kemanusiaan
+				</span>
+				<span class="mr-4">
+					<i class="fas fa-circle text-warning"></i> Bencana Alam
+				</span>
+			</div>
+			</div>
+		</div>
+		</div>
+		</div>
 		<!-- Calender -->
 		<div class="container-fluid">
     <div class="row justify-content-center">
@@ -404,9 +448,44 @@ $tanggal_transaksi_query = "SELECT DATE_FORMAT(tanggal_transaksi, '%M %Y') as bu
 	<!-- Bootstrap JS -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- Script Line Chart -->
+	<script>
+  document.addEventListener("DOMContentLoaded", function() {
+              const kesahatanCount = <?php echo $kesehatan_count; ?>;
+              const pendidikanCount = <?php echo $pendidikan_count; ?>;
+			  const kemanusiaanCount = <?php echo $kemanusiaan_count; ?>;
+              const bencanaCount = <?php echo $bencana_count; ?>;
+  const data = {
+                  labels: ['Kesehatan', 'Pendidikan','Kemanusiaan', 'Bencana Alam'],
+                  datasets: [{
+                      label: '',
+                      data: [kesahatanCount, pendidikanCount,kemanusiaanCount, bencanaCount],
+                      backgroundColor: [
+                          '#059212',
+                          '#FF1E1E',
+						  '#050C9C',
+						  '#FFC700'
+                      ],
+                      hoverOffset: 4
+                  }]
+              };
+  const config = {
+                  type: 'doughnut',
+                  data: data,
+                  options: {
+                      responsive: true,
+                      maintainAspectRatio: false
+                  }
+              };
+              const myChart = new Chart(
+                  document.getElementById('myPieChart'),
+                  config
+              );
+          });
+  </script>
+
 <script>
-  		document.addEventListener("DOMContentLoaded", function() {
+
+  document.addEventListener("DOMContentLoaded", function() {
             const bulanPembayaran = <?php echo $bulan_pembayaran_js; ?>;
             const totalPembayaran = <?php echo $total_pembayaran_js; ?>;
 
@@ -418,7 +497,7 @@ $tanggal_transaksi_query = "SELECT DATE_FORMAT(tanggal_transaksi, '%M %Y') as bu
         const data = {
             labels: bulanPembayaran,
             datasets: [{
-                label: 'Nominal Donasi',
+                label: 'Jumlah Pembayaran',
                 fill: false,
                 borderColor: '#EE4E4E',
                 data: totalPembayaran,
@@ -461,6 +540,10 @@ $tanggal_transaksi_query = "SELECT DATE_FORMAT(tanggal_transaksi, '%M %Y') as bu
                 config
             );
         });
+   
+</script>
+  
+</body>
    
 </script>
 </body>
