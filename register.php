@@ -70,7 +70,7 @@ if (isset($_POST['register'])) {
             <input type="submit" name="register" value="Register" />
             <p>Sudah punya akun? <a href="login.php">Login disini</a></p>
         </form>
-        <button class="back-button" onclick="location.href='index.html'">ke Halaman Utama</button>
+        <button class="back-button" onclick="location.href='index.php'">ke Halaman Utama</button>
     </div>
 </body>
 

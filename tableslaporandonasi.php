@@ -302,7 +302,6 @@ if(isset($_POST['btnTampil'])) {
 					</div>
 					<div class="row">
                     	<div class="col-12 text-center mb-3">
-                    	<a href="dashboardadmin.php"><button type="button" class="btn btn-warning">Kembali</button></a> 
                     	<a href="cetak.php?awal=<?php echo $tglAwal; ?>&&akhir=<?php echo $tglAkhir; ?>" target="_blank" alt="Edit Data" class="btn btn-danger">Cetak Laporan</a>
                     </div>
                 </div> 
