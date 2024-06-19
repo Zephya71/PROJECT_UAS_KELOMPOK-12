@@ -143,34 +143,87 @@
 	<!-- berita starts -->
 	<section class="section-padding" id="berita">
 		<div class="container">
-			<div class="section-title text-center">
-				<h1>Berita</h1>
-				<p>Kabar terbaru tentang kegiatan kami dan informasi penting lainnya.</p>
-			</div>
 			<div class="row">
-				<div class="col-md-4">
-					<div class="card mb-4 shadow-sm"><img alt="" class="card-img-top" src="Foto/berita-1.jpeg">
-						<div class="card-body">
-							<p class="card-text">Peluncuran platform baru kami untuk membantu lebih banyak orang dengan
-								lebih efisien.</p>
-						</div>
+				<div class="col-md-12">
+					<div class="section-header text-center pb-4">
+						<h2>Berita</h2>
+						<p>Update perkembangan dan berita terkini.</p>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="card mb-4 shadow-sm"><img alt="" class="card-img-top" src="Foto/berita-2.jpeg">
-						<div class="card-body">
-							<p class="card-text">Kisah sukses: Bagaimana bantuan Anda telah mengubah kehidupan seseorang.
-							</p>
-						</div>
-					</div>
+			</div>
+			<div class="berita">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="single-item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12 col-12">
+                            <div class="berita-img"><img alt="" class="img-fluid" src="Foto/berita_1.jpg"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-12 ps-lg-4">
+                            <div class="berita-text">
+                                <h2>Mewujudkan Mimpi Pendidikan untuk Generasi Masa Depan</h2>
+                                <p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
+                                <a class="btn btn-outline-success" href="baca_selengkapnya.php?id=1">Baca Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="single-item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12 col-12">
+                            <div class="berita-img"><img alt="" class="img-fluid" src="Foto/berita_3.jpg"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-12 ps-lg-4">
+                            <div class="berita-text">
+                                <h2>Membangun Harapan untuk Anak Yatim</h2>
+                                <p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
+                                <a class="btn btn-outline-success" href="baca_selengkapnya.php?id=2">Baca Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="single-item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12 col-12">
+                            <div class="berita-img"><img alt="" class="img-fluid" src="Foto/berita_2.jpg"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-12 col-12 ps-lg-4">
+                            <div class="berita-text">
+                                <h2>Bangun Jembatan untuk Masa Depan yang Lebih Terhubung</h2>
+                                <p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
+                                <a class="btn btn-outline-success" href="baca_selengkapnya.php?id=3">Baca Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
 				</div>
-				<div class="col-md-4">
-					<div class="card mb-4 shadow-sm"><img alt="" class="card-img-top" src="Foto/berita-3.jpeg">
-						<div class="card-body">
-							<p class="card-text">Kami mengadakan acara amal untuk menggalang dana lebih banyak lagi.</p>
-						</div>
-					</div>
-				</div>
+
 			</div>
 		</div>
 	</section><!-- berita Ends -->
