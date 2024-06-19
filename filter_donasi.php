@@ -25,22 +25,19 @@ if (mysqli_num_rows($result) > 0) {
         // Hitung persentase dana yang terkumpul
         $persentase_terkumpul = ($row['dana_terkumpul'] / $row['target_dana']) * 100;
         $sisa_target_dana = $row['target_dana'] - $row['dana_terkumpul'];
-        
+
         // Tampilkan informasi donasi
         echo '<div class="col-md-4 mb-4">';
         echo '<div class="card h-100 shadow-sm">';
         echo '<img src="Foto/' . $row['gambar'] . '" class="card-img-top" alt="Gambar Campaign" style="height: 200px; object-fit: cover;">';
         echo '<div class="card-body d-flex flex-column">';
         echo '<h5 class="card-title fw-bold">' . $row['nama_campaign'] . '</h5>';
-        echo '<p class="card-text"><strong>Kategori:</strong> ' . $row['kategori'] . '</p>';
-        echo '<p class="card-text flex-grow-1"><strong>Deskripsi:</strong> ' . $row['deskripsi'] . '</p>';
-        echo '<p class="card-text"><strong>Target Dana:</strong> Rp. ' . number_format($row['target_dana']) . '</p>';
-        echo '<p class="card-text"><strong>Sisa Target Dana:</strong> Rp. ' . number_format($sisa_target_dana) . '</p>';
+        echo '<p class="card-text">' . $row['kategori'] . '</p>';
         echo '<div class="progress" style="height: 20px;">';
-        echo '<div class="progress-bar" role="progressbar" style="width: ' . $persentase_terkumpul . '%; background-color: #90ee90; color: black;" aria-valuenow="' . $persentase_terkumpul . '" aria-valuemin="0" aria-valuemax="100">' . number_format($persentase_terkumpul, 2) . '%</div>';
+        echo '<div class="progress-bar" role="progressbar" style="width: ' . $persentase_terkumpul . '%; background-color: #6495ed; color: white;" aria-valuenow="' . $persentase_terkumpul . '" aria-valuemin="0" aria-valuemax="100">' . number_format($persentase_terkumpul, 2) . '%</div>';
         echo '</div>';
         echo '<p class="card-text mt-2"><strong>Dana Terkumpul:</strong> Rp. ' . number_format($row['dana_terkumpul']) . '</p>';
-        echo '<a href="transaksi.php?id=' . $row['id'] . '" class="btn btn-primary btn-success mt-auto">Donate Now</a>';
+        echo '<a href="campaign_detail.php?id=' . $row['id'] . '" class="btn btn-success mt-auto">Lihat Donasi</a>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
