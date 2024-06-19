@@ -26,6 +26,7 @@ if (mysqli_num_rows($result) > 0) {
         echo '<p class="card-text"><strong>Kategori:</strong> ' . $row['kategori'] . '</p>';
         echo '<p class="card-text flex-grow-1"><strong>Deskripsi:</strong> ' . $row['deskripsi'] . '</p>';
         echo '<p class="card-text"><strong>Target Dana:</strong> Rp. ' . number_format($row['target_dana']) . '</p>';
+        echo '<a href="transaksi.php?id=' . $row['id'] . '" class="btn btn-primary btn-success mt-auto">Donate Now</a>';
         echo '<a href="transaksi.php?id=' . $row['id'] . '" class="btn btn-primary mt-auto">Donate Now</a>';
         echo '</div>';
         echo '</div>';

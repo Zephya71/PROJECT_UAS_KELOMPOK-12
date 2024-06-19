@@ -3,7 +3,7 @@ session_start();
 include("inc_koneksi.php");
 
 if (isset($_SESSION['admin_username'])) {
-    header("location:admin.php");
+    header("location:dashboardadmin.php");
     exit();
 }
 
@@ -31,7 +31,7 @@ if (isset($_POST['login'])) {
 
         if ($r1 && $r1['password'] == md5($password)) {
             $_SESSION['admin_username'] = $username;
-            header("location:admin.php");
+            header("location:dashboardadmin.php");
             exit();
         } else {
             $sql2 = "SELECT * FROM user WHERE username = '$username'";

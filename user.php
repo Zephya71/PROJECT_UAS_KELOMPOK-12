@@ -195,12 +195,12 @@ if (mysqli_num_rows($result) > 0) {
 							<div class="single-item">
 								<div class="row">
 									<div class="col-lg-4 col-md-12 col-12">
-										<div class="berita-img"><img alt="" class="img-fluid" src="Foto/home-2.jpeg"></div>
+										<div class="berita-img"><img alt="" class="img-fluid" src="Foto/berita_1.jpg"></div>
 									</div>
 									<div class="col-lg-8 col-md-12 col-12 ps-lg-4">
 										<div class="berita-text">
-											<h2>Pendidikan Layak</h2>
-											<p>Campaign ini telah selsai dan telah tersalurkan ke orang yang bersangkutan.</p>
+											<h2>Mewujudkan Mimpi Pendidikan untuk Generasi Masa Depan</h2>
+											<p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
 											<a class="btn btn-outline-success" href="#">Read More</a>
 										</div>
 									</div>
@@ -211,13 +211,13 @@ if (mysqli_num_rows($result) > 0) {
 							<div class="single-item">
 								<div class="row">
 									<div class="col-lg-4 col-md-12 col-12">
-										<div class="berita-img"><img alt="" class="img-fluid" src="img/berita-2.jpg"></div>
+										<div class="berita-img"><img alt="" class="img-fluid" src="Foto/berita_3.jpg"></div>
 									</div>
 									<div class="col-lg-8 col-md-12 col-12 ps-lg-4">
 										<div class="berita-text">
-											<h2>Pendidikan Layak<br>
+											<h2>Membangun Harapan untuk Anak Yatim<br>
 											</h2>
-											<p>Campaign ini telah selsai dan telah tersalurkan ke orang yang bersangkutan.</p>
+											<p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
 											<a class="btn btn-outline-success" href="#">Read More</a>
 										</div>
 									</div>
@@ -228,13 +228,13 @@ if (mysqli_num_rows($result) > 0) {
 							<div class="single-item">
 								<div class="row">
 									<div class="col-lg-4 col-md-12 col-12">
-										<div class="berita-img"><img alt="" class="img-fluid" src="img/berita-3.jpg"></div>
+										<div class="berita-img"><img alt="" class="img-fluid" src="Foto/berita_2.jpg"></div>
 									</div>
 									<div class="col-lg-8 col-md-12 col-12 ps-lg-4">
 										<div class="berita-text">
-											<h2>Pendidikan Layak<br>
+											<h2>Bangun Jembatan untuk Masa Depan yang Lebih Terhubung<br>
 											</h2>
-											<p>Campaign ini telah selsai dan telah tersalurkan ke orang yang bersangkutan.</p>
+											<p>Campaign ini telah selesai dan telah tersalurkan ke orang yang bersangkutan.</p>
 											<a class="btn btn-outline-success" href="#">Read More</a>
 										</div>
 									</div>
@@ -274,6 +274,7 @@ if (mysqli_num_rows($result) > 0) {
 						Kami berdedikasi untuk menyediakan pengalaman donasi yang aman, transparan, dan efisien. Dengan beragam pilihan kampanye yang tersedia, kami berharap dapat menginspirasi lebih banyak orang untuk bergabung dalam misi kami untuk membuat dunia menjadi tempat yang lebih baik.
 					</p>
 					<div class="text-center mt-4">
+						<a href="#donasi" class="btn btn-primary btn-lg btn-success">Bergabung dengan Kami</a>
 						<a href="#donasi" class="btn btn-primary btn-lg">Bergabung dengan Kami</a>
 					</div>
 				</div>

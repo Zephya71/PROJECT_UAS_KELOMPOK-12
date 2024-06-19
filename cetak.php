@@ -35,6 +35,7 @@ $SqlPeriode = "WHERE T.tanggal_transaksi BETWEEN '$awal' AND '$akhir'";
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laporan Transaksi Donasi</title>
     <title>Laporan Transaksi Pemesanan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
