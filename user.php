@@ -275,7 +275,6 @@ if (mysqli_num_rows($result) > 0) {
 					</p>
 					<div class="text-center mt-4">
 						<a href="#donasi" class="btn btn-primary btn-lg btn-success">Bergabung dengan Kami</a>
-						<a href="#donasi" class="btn btn-primary btn-lg">Bergabung dengan Kami</a>
 					</div>
 				</div>
 			</div>
